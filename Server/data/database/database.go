@@ -20,6 +20,9 @@ func ConnectAndCreate(databaseType,connectionString string) {
 	DB.AutoMigrate(&models.Operation{})
 	DB.AutoMigrate(&models.Product{})
 	DB.AutoMigrate(&models.Equipment{})
+	DB.AutoMigrate(&models.ActionOnModel{})
+	DB.AutoMigrate(&models.TypeOfClothe{})
+	DB.AutoMigrate(&models.Model{})
 	DB.LogMode(true)
 }
 

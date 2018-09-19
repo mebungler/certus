@@ -20,8 +20,8 @@ func AddOperation(operation models.Operation) error {
 	}
 	DB.Create(&operation)
 	if DB.Error!=nil{
-		return DB.Error
 		logger.LogErr(DB.Error)
+		return DB.Error
 	}
 	return nil
 }

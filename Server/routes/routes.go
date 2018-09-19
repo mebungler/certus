@@ -84,16 +84,22 @@ var routes = Routes{
 		HandlerFunc: handlers.AddCustomer,
 	},
 	Route{
-		Name: "CustomerAdd",
+		Name: "GetCustomers",
 		Method: "POST",
 		Pattern: "/api/customer",
 		HandlerFunc: handlers.GetCustomers,
 	},
 	Route{
-		Name: "CustomerAdd",
-		Method: "POST",
-		Pattern: "/api/customer",
+		Name: "GetCustomer",
+		Method: "Get",
+		Pattern: "/api/customer/{id}",
 		HandlerFunc: handlers.GetCustomer,
+	},
+	Route{
+		Name: "ModelAdd",
+		Method: "POST",
+		Pattern: "/api/model",
+		HandlerFunc: handlers.AddModel,
 	},
 }
 func NewRouter() http.Handler {

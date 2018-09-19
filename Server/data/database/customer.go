@@ -2,6 +2,7 @@ package database
 
 import "../models"
 import "../../logger"
+
 func AddCustomer(customer models.Customer) error {
 	if !DB.HasTable(&customer) {
 		DB.CreateTable(&customer)
@@ -18,8 +19,8 @@ func GetCustomer(ID string) (models.Customer,error) {
 	customer :=models.Customer{}
 	DB.Where("ID = ?",ID).First(&customer)
 	if DB.Error!=nil{
-		return models.Customer{},DB.Error
 		logger.LogErr(DB.Error)
+		return models.Customer{},DB.Error
 	}
 	return customer,nil
 }
@@ -28,8 +29,8 @@ func GetCustomers() ([]models.Customer,error) {
 	var customers []models.Customer
 	DB.Find(&customers)
 	if DB.Error!=nil{
-		return []models.Customer{},DB.Error
 		logger.LogErr(DB.Error)
+		return []models.Customer{},DB.Error
 	}
 	return customers,nil
 }

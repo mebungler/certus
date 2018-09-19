@@ -19,8 +19,8 @@ func GetEquipments() ([]models.Equipment,error){
 	var equipments []models.Equipment
 	DB.Find(&equipments)
 	if DB.Error!=nil{
-		return []models.Equipment{},DB.Error
 		logger.LogErr(DB.Error)
+		return []models.Equipment{},DB.Error
 	}
 	return equipments,nil
 }
