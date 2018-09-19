@@ -77,6 +77,24 @@ var routes = Routes{
 		"/api/equipment/{id}",
 		handlers.GetEquipment,
 	},
+	Route{
+		Name: "CustomerAdd",
+		Method: "POST",
+		Pattern: "/api/customer",
+		HandlerFunc: handlers.AddCustomer,
+	},
+	Route{
+		Name: "CustomerAdd",
+		Method: "POST",
+		Pattern: "/api/customer",
+		HandlerFunc: handlers.GetCustomers,
+	},
+	Route{
+		Name: "CustomerAdd",
+		Method: "POST",
+		Pattern: "/api/customer",
+		HandlerFunc: handlers.GetCustomer,
+	},
 }
 func NewRouter() http.Handler {
 	router := mux.NewRouter().StrictSlash(true)
