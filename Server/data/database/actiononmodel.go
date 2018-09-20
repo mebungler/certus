@@ -11,8 +11,8 @@ func AddAction(action models.ActionOnModel) error {
 	}
 	DB.Create(&action)
 	if DB.Error != nil {
-		return DB.Error
 		logger.LogErr(DB.Error)
+		return DB.Error
 	}
 	return nil
 }

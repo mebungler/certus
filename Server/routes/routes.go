@@ -101,7 +101,26 @@ var routes = Routes{
 		Pattern: "/api/model",
 		HandlerFunc: handlers.AddModel,
 	},
+	Route{
+		Name: "GetModels",
+		Method: "Get",
+		Pattern: "/api/model",
+		HandlerFunc: handlers.GetModels,
+	},
+	Route{
+		Name: "GetModels",
+		Method: "Get",
+		Pattern: "/api/model/{id}",
+		HandlerFunc: handlers.GetModel,
+	},
+	Route{
+		Name: "AddTypeClothe",
+		Method: "POST",
+		Pattern: "/api/type",
+		HandlerFunc: handlers.AddType,
+	},
 }
+
 func NewRouter() http.Handler {
 	router := mux.NewRouter().StrictSlash(true)
 	c := cors.New(cors.Options{

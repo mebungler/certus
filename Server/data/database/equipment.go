@@ -9,8 +9,8 @@ func GetEquipment(ID string) (models.Equipment,error){
 	equipment :=models.Equipment{}
 	DB.Where("ID = ?", ID).First(&equipment)
 	if DB.Error!=nil{
-		return models.Equipment{},DB.Error
 		logger.LogErr(DB.Error)
+		return models.Equipment{},DB.Error
 	}
 	return equipment,nil
 }
@@ -40,8 +40,8 @@ func AddEquipment(equipment models.Equipment) error {
 func RemoveEquipment(id string) error{
 	DB.Delete(models.Equipment{ID:id})
 	if DB.Error!=nil{
-		return DB.Error
 		logger.LogErr(DB.Error)
+		return DB.Error
 	}
 	return nil
 }
