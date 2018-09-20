@@ -15,5 +15,6 @@ func main() {
 	database.AddEquipment(models.Equipment{ID:"123456789",Brand:"LOL",MachineStatus:"Good",MachineType:"Sewing machine"})
 	database.AddProduct(models.Product{ID:"000000111111"})
 	database.RemoveOperation("")
+
 	http.ListenAndServe(":8080",router)
 }

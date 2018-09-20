@@ -84,18 +84,43 @@ var routes = Routes{
 		HandlerFunc: handlers.AddCustomer,
 	},
 	Route{
-		Name: "CustomerAdd",
+		Name: "GetCustomers",
 		Method: "POST",
 		Pattern: "/api/customer",
 		HandlerFunc: handlers.GetCustomers,
 	},
 	Route{
-		Name: "CustomerAdd",
-		Method: "POST",
-		Pattern: "/api/customer",
+		Name: "GetCustomer",
+		Method: "Get",
+		Pattern: "/api/customer/{id}",
 		HandlerFunc: handlers.GetCustomer,
 	},
+	Route{
+		Name: "ModelAdd",
+		Method: "POST",
+		Pattern: "/api/model",
+		HandlerFunc: handlers.AddModel,
+	},
+	Route{
+		Name: "GetModels",
+		Method: "Get",
+		Pattern: "/api/model",
+		HandlerFunc: handlers.GetModels,
+	},
+	Route{
+		Name: "GetModels",
+		Method: "Get",
+		Pattern: "/api/model/{id}",
+		HandlerFunc: handlers.GetModel,
+	},
+	Route{
+		Name: "AddTypeClothe",
+		Method: "POST",
+		Pattern: "/api/type",
+		HandlerFunc: handlers.AddType,
+	},
 }
+
 func NewRouter() http.Handler {
 	router := mux.NewRouter().StrictSlash(true)
 	c := cors.New(cors.Options{
