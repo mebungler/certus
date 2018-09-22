@@ -5,6 +5,7 @@ type Operation struct {
 	ProductID string `json:"product_id"`
 	TimeSpan int `json:"time_span"`
 	Equipment Equipment `json:"equipment"`
+	EquipmentID string
 	Number int `json:"number"`
 	SeamstressPriority int `json:"seamstressPriority"`
 	Name string `json:"name"`

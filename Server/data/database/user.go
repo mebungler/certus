@@ -13,8 +13,8 @@ func AddUser(user models.User) error {
 	}
 	DB.Create(&user)
 	if DB.Error!=nil{
-		return DB.Error
 		logger.LogErr(DB.Error)
+		return DB.Error
 	}
 	return nil
 }
