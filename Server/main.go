@@ -25,7 +25,7 @@ func main() {
 	op := []models.Operation{}
 	database.Remove(&eq)
 	fmt.Println(op)
-	database.Add(models.Equipment{ID:"123231dsds",Brand:"CS:GO",MachineStatus:"Well",MachineType:"machine"})
+	database.Add(models.Model{ID:"123231dsd23232s",CodeOfModel:"wwwe232w"})
 
 	// database.GetAllOperations()
 //	fmt.Println(ddd[0].Equipment.Name)

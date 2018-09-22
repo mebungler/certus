@@ -42,3 +42,10 @@ func Add(object interface{}) error {
 	}
 	return nil
 }
+func GetAllWithEagerLoading(object interface{},str string) error  {
+	DB.Preload(str).Find(object)
+	if DB.Error != nil {
+		return DB.Error
+	}
+	return nil
+}
