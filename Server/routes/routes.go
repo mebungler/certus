@@ -110,7 +110,7 @@ var routes = Routes{
 	Route{
 		Name: "GetModels",
 		Method: "Get",
-		Pattern: "/api/modelpre",
+		Pattern: "/api/pre/model",
 		HandlerFunc: handlers.GetAllPre,
 	},
 	Route{
