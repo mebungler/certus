@@ -2,7 +2,7 @@ package models
 
 type Operation struct {
 	ID string `gorm:"primary_key" json:"id,omitempty"`
-	ProductID string `json:"product_id"`
+	ProductID string `json:"productID"`
 	TimeSpan int `json:"time_span"`
 	Equipment Equipment `json:"equipment"`
 	EquipmentID string
