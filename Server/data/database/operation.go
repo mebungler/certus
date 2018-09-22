@@ -1,13 +1,14 @@
 package database
 
 import (
-	"../models"
 	"../../logger"
+	"../models"
 )
 
 func GetAllOperations() ([]models.Operation,error){
 	var operations []models.Operation
-	DB.Find(&operations)
+	DB.Preload("Equipment").Find(&operations)
+
 	if DB.Error!=nil{
 		return nil,DB.Error
 		logger.LogErr(DB.Error)
