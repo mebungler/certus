@@ -36,7 +36,7 @@ class LoginForm extends React.Component {
                     case 1:
                         break;
                     case 2:
-                        this.props.history.push("/seamstress");
+                        this.props.history.push("/operation");
                         break;
                     case 3:
                         break;

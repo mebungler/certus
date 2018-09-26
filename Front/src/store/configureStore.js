@@ -11,7 +11,7 @@ export default () => {
             users: usersReducer,
             filters: filtersReducer,
             user: userReducer,
-            seamstress:seamstressReducer,
+            operation:seamstressReducer,
             equipment:equipmentReducer
         })
     );

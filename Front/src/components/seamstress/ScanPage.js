@@ -10,7 +10,7 @@ class ScanPage extends React.Component {
     };
     handleScan = (data) => {
         if (data) {
-            api.seamstress.product(data).then(res => {
+            api.operation.product(data).then(res => {
                 console.log(res);
                 this.props.dispatch(ProductScanned(res.data.product));
                 this.props.history.push("/timer");
