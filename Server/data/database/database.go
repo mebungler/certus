@@ -23,7 +23,7 @@ func ConnectAndCreate(databaseType,connectionString string) {
 	DB.AutoMigrate(&models.ActionOnModel{})
 	DB.AutoMigrate(&models.TypeOfCloth{})
 	DB.AutoMigrate(&models.Model{})
-	DB.LogMode(false)
+	DB.LogMode(true)
 }
 
 func Close(){

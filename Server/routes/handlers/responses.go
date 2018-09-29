@@ -15,5 +15,6 @@ type Response struct {
 	Customers   []models.Customer    `json:"customers,omitempty"`
 	Models      []models.Model       `json:"models,omitempty"`
 	TypeOfCloth []models.TypeOfCloth `json:"typeofclothe,omitempty"`
+	Order 		[]models.Order 		 `josn:"order,omitempty"`
 
 }
