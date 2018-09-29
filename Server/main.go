@@ -25,12 +25,13 @@ func main() {
 	op := []models.Operation{}
 	database.Remove(&eq)
 	fmt.Println(op)
-	database.Add(models.Model{ID:"123231dsd23232s",CodeOfModel:"wwwe232w",})
-
+	database.Add(models.Model{ID:"123231ds34343dd23232s",CodeOfModel:"wwwe232w"})
+	customer_1 := []models.Model{}
 	// database.GetAllOperations()
 //	fmt.Println(ddd[0].Equipment.Name)
 
 	//database.RemoveOperation("")
-
+	database.GetAllWithEagerLoading(&customer_1,"Operation")
+		fmt.Println(customer_1)
 	http.ListenAndServe(":8080",router)
 }

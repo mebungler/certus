@@ -3,7 +3,9 @@ package handlers
 import (
 	"../../decoder"
 	"../../data/database"
+	"../../data/models"
 	"../../logger"
+	"github.com/gorilla/mux"
 	"net/http"
 	"encoding/json"
 )
@@ -68,3 +70,19 @@ func GetUsers(w http.ResponseWriter, r *http.Request){
 	}
 }
 
+func GetUser(w http.ResponseWriter, r *http.Request) {
+	params:=mux.Vars(r)
+	user:=models.User{ID:params["id"]}
+	err:=database.Get(&user)
+	if err== nil {
+		w.WriteHeader(http.StatusOK)
+		if err:=json.NewEncoder(w).Encode(Response{User: user}); err!=nil{
+			logger.LogErr(err)
+		}
+	} else {
+		w.WriteHeader(http.StatusBadRequest)
+		if err:=json.NewEncoder(w).Encode(Response{Errors:Errors{Global:"Invalid credentials"}}); err!=nil{
+			logger.LogErr(err)
+		}
+	}
+}

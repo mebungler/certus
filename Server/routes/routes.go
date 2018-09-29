@@ -42,6 +42,12 @@ var routes = Routes{
 		handlers.GetUsers,
 	},
 	Route{
+		"GetByID",
+		"GET",
+		"/api/user/{id}",
+		handlers.GetProduct,
+	},
+	Route{
 		"ProductGet",
 		"GET",
 		"/api/product/{id}",
@@ -124,6 +130,18 @@ var routes = Routes{
 		Method: "POST",
 		Pattern: "/api/type",
 		HandlerFunc: handlers.AddType,
+	},
+	Route{
+		Name: "AddOrder",
+		Method: "POST",
+		Pattern: "/api/order",
+		HandlerFunc: handlers.AddOrder,
+	},
+	Route{
+		Name: "GetOrder",
+		Method: "Get",
+		Pattern: "/api/order/{id}",
+		HandlerFunc: handlers.GetOrder,
 	},
 }
 
