@@ -39,13 +39,13 @@ var routes = Routes{
 		"UserGet",
 		"GET",
 		"/api/user",
-		handlers.GetUsers,
+		handlers.GetUser,
 	},
 	Route{
 		"GetByID",
 		"GET",
 		"/api/user/{id}",
-		handlers.GetProduct,
+		handlers.GetUser,
 	},
 	Route{
 		"ProductGet",
