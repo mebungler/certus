@@ -45,7 +45,7 @@ var routes = Routes{
 		"GetByID",
 		"GET",
 		"/api/user/{id}",
-		handlers.GetProduct,
+		handlers.GetUser,
 	},
 	Route{
 		"ProductGet",

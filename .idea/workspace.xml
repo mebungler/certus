@@ -1,21 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5bc12f4d-a6d7-4d04-bc61-3ad0e99a5a7d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Server/data/models/order.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/routes/handlers/order.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/data/database/database.go" beforeDir="false" afterPath="$PROJECT_DIR$/Server/data/database/database.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/data/database/get.go" beforeDir="false" afterPath="$PROJECT_DIR$/Server/data/database/get.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/data/models/clothetype.go" beforeDir="false" afterPath="$PROJECT_DIR$/Server/data/models/clothetype.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/data/models/model.go" beforeDir="false" afterPath="$PROJECT_DIR$/Server/data/models/model.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/Server/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/routes/handlers/equipment.go" beforeDir="false" afterPath="$PROJECT_DIR$/Server/routes/handlers/equipment.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/routes/handlers/responses.go" beforeDir="false" afterPath="$PROJECT_DIR$/Server/routes/handlers/responses.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/routes/handlers/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/Server/routes/handlers/user.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/routes/routes.go" beforeDir="false" afterPath="$PROJECT_DIR$/Server/routes/routes.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/d.db" beforeDir="false" afterPath="$PROJECT_DIR$/d.db" afterDir="false" />
-    </list>
+    <list default="true" id="5bc12f4d-a6d7-4d04-bc61-3ad0e99a5a7d" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -261,7 +247,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.29425114" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
