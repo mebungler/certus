@@ -25,6 +25,7 @@ func main() {
 	op := []models.Operation{}
 	database.Remove(&eq)
 	fmt.Println(op)
+	database.Remove(models.Customer{ID:""})
 	database.Add(models.Model{ID:"123231dsd23232s",CodeOfModel:"wwwe232w",})
 
 	// database.GetAllOperations()
