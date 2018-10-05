@@ -2,11 +2,13 @@ package models
 
 type Order struct {
 	ID string `gorm:"primary_key" json:"id,omitempty"`
-	Customer Customer
+	Customer Customer       `json:"customer"`
 	CustomerID string
-	TypeOfCloth TypeOfCloth
+	TypeOfCloth TypeOfCloth	 `json:"typeOfCloth"`
 	TypeOfClothID string
-	ActionOnModel ActionOnModel
+	ActionOnModel ActionOnModel `json:"actionOnModel"`
 	ActionOnModelID string
+	Property 	  []Property `json:"property"`
+
 
 }
