@@ -11,6 +11,7 @@ type Model struct {
 	TypeOfCloth TypeOfCloth `json:"typeOfCloth,omitempty"`
 	TypeOfClotheID string
 	ActionOnModel []ActionOnModel `json:"actionOnModel"`
+
 	CreatedAt time.Time `json:"createdAt,omitempty"`
 	UpdatedAt time.Time `json:"updatedAt,omitempty"`
 }
