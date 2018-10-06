@@ -6,10 +6,9 @@ type Order struct {
 	CustomerID string
 	TypeOfCloth TypeOfCloth	 `json:"typeOfCloth"`
 	TypeOfClothID string
-	ActionOnModel ActionOnModel `json:"actionOnModel"`
-	ActionOnModelID string
-	Order Order 	`json:"order"`
-	OrderID string
+	CodeOfModel string
+	Model Model 		 	`json:"model"`
+	ModelID string
 	Property 	  []Property `json:"property"`
 
 
