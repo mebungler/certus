@@ -180,6 +180,12 @@ var routes = Routes{
 		Pattern: "/api/pre/passports",
 		HandlerFunc: handlers.GetAllPrePassports,
 	},
+	Route{
+		Name: "GetOrders",
+		Method: "Get",
+		Pattern: "/api/pre/orders",
+		HandlerFunc: handlers.GetAllPreOrder,
+	},
 }
 
 func NewRouter() http.Handler {
