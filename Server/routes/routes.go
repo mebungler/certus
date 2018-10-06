@@ -183,7 +183,7 @@ var routes = Routes{
 	Route{
 		Name: "GetOrders",
 		Method: "Get",
-		Pattern: "/api/pre/orders",
+		Pattern: "/api/pre/order",
 		HandlerFunc: handlers.GetAllPreOrder,
 	},
 }
