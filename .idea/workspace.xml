@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5bc12f4d-a6d7-4d04-bc61-3ad0e99a5a7d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Server/routes/routes.go" beforeDir="false" afterPath="$PROJECT_DIR$/Server/routes/routes.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/Server/main.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,22 +33,22 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="go" value="138" />
+          <entry key="go" value="139" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Go" value="138" />
+          <entry key="Go" value="139" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="go" value="2962" />
+          <entry key="go" value="2995" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Go" value="2962" />
+          <entry key="Go" value="2995" />
         </counts>
       </usages-collector>
     </session>
@@ -74,6 +74,15 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Server/main.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="144">
+              <caret line="32" column="107" selection-start-line="32" selection-start-column="107" selection-end-line="32" selection-end-column="107" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Server/routes/routes.go">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="236">
@@ -112,7 +121,6 @@
         <option value="$PROJECT_DIR$/Server/routes/handlers/property.go" />
         <option value="$PROJECT_DIR$/Server/data/models/property.go" />
         <option value="$PROJECT_DIR$/Server/data/models/model.go" />
-        <option value="$PROJECT_DIR$/Server/main.go" />
         <option value="$PROJECT_DIR$/Server/data/models/order.go" />
         <option value="$PROJECT_DIR$/Server/data/models/passport.go" />
         <option value="$PROJECT_DIR$/Server/routes/handlers/passport.go" />
@@ -122,6 +130,7 @@
         <option value="$PROJECT_DIR$/Server/routes/handlers/clothetype.go" />
         <option value="$PROJECT_DIR$/Server/routes/handlers/order.go" />
         <option value="$PROJECT_DIR$/Server/routes/routes.go" />
+        <option value="$PROJECT_DIR$/Server/main.go" />
       </list>
     </option>
   </component>
@@ -422,13 +431,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Server/main.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="52">
-          <caret line="32" column="34" lean-forward="true" selection-start-line="32" selection-start-column="34" selection-end-line="32" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Server/data/database/model.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="260">
@@ -504,6 +506,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Server/routes/routes.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="236">
+          <caret line="185" column="32" selection-start-line="185" selection-start-column="32" selection-end-line="185" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Server/routes/handlers/order.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1259">
@@ -518,10 +527,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Server/routes/routes.go">
+    <entry file="file://$PROJECT_DIR$/Server/main.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="185" column="32" selection-start-line="185" selection-start-column="32" selection-end-line="185" selection-end-column="32" />
+        <state relative-caret-position="144">
+          <caret line="32" column="107" selection-start-line="32" selection-start-column="107" selection-end-line="32" selection-end-column="107" />
         </state>
       </provider>
     </entry>
