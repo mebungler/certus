@@ -15,7 +15,7 @@ export default {
                 .catch(err => err.response),
         get: () => axios.get(url + "/api/user").then(res => res)
     },
-    seamstress: {
+    operation: {
         product: credentials =>
             axios
                 .get(url + "/api/product/" + credentials)
@@ -32,16 +32,50 @@ export default {
                 .then(res => res)
                 .catch(err => err.response)
     },
-    equipment:{
-        add:credentials =>
+    equipment: {
+        add: credentials =>
             axios
                 .post(url + "/api/equipment", credentials)
                 .then(res => res)
                 .catch(err => err.response),
-        get:credentials =>
+        get: credentials =>
             axios
                 .get(url + "/api/equipment", credentials)
                 .then(res => res)
                 .catch(err => err.response),
+        getAll: () =>
+            axios.get(url + "/api/equipment").then(res => {
+                return res
+            }).catch(err => err.respond)
+    },
+    model: {
+        add: (credentials) =>
+            axios
+                .post(url + "/api/model", credentials)
+                .then(res => res)
+                .catch(err => err.response),
+        getAll: (credentials) =>
+            axios.get(url + "/api/model", credentials).then(res => {
+                return res
+            }).catch(err => err.response),
+        preGetAll:(credentials)=>
+            axios.get(url+"/api/pre/model",credentials).then(res=>{
+                return res
+            }).catch(err=>err.response)
+
+    },
+    customer:{
+        add:(credentials)=>
+            axios.post(url+"/api/customer",credentials)
+                .then(res=>res)
+                .catch(err=>err.response),
+        getAll:(credentials)=>
+            axios.get(url+"/api/customer",credentials).then(res=>{
+                return res
+            }).catch(err=>err.response),
+        getPreAll:(credentials)=>
+            axios.get(url+"/api/pre/customer",credentials).then(res=>{
+                return res
+            }).catch(err=>err.response)
     }
-};
+}

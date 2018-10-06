@@ -119,6 +119,32 @@ const Sidebar = () => {
                                             <span className="sidebar-normal"> Оборудование </span>
                                         </NavLink>
                                     </li>
+                                    <li>
+                                        <NavLink
+                                            to="/models"
+                                            className="nav-link nav-item"
+                                            href="../examples/tables/extended.html"
+                                        >
+                      <span className="sidebar-mini">
+                        {" "}
+                          <p className="fa fa-tasks"/>{" "}
+                      </span>
+                                            <span className="sidebar-normal"> Model </span>
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink
+                                            to="/customers"
+                                            className="nav-link nav-item"
+                                            href="../examples/tables/extended.html"
+                                        >
+                      <span className="sidebar-mini">
+                        {" "}
+                          <p className="fa fa-tasks"/>{" "}
+                      </span>
+                                            <span className="sidebar-normal"> Customer </span>
+                                        </NavLink>
+                                    </li>
                                 </ul>
                             </div>
                         </li>

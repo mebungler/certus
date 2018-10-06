@@ -177,14 +177,14 @@ class EquipmentsPage extends React.Component {
                                      willChange: 'top, left'
                                  }}>
                                 <a className="dropdown-item"
-                                   onClick={()=>{this.toggleSelect("brand","German brand")}}
-                                   href="#">German brand</a>
+                                   onClick={()=>{this.toggleSelect("brand","Jack")}}
+                                   href="#">Jack</a>
                                 <a className="dropdown-item"
-                                   onClick={()=>{this.toggleSelect("brand","American brand")}}
-                                   href="#">American brand</a>
+                                   onClick={()=>{this.toggleSelect("brand","Juki")}}
+                                   href="#">Juki</a>
                                 <a className="dropdown-item"
-                                   onClick={()=>{this.toggleSelect("brand","Uzbek brand")}}
-                                   href="#">Uzbek brand</a>
+                                   onClick={()=>{this.toggleSelect("brand","Kansai")}}
+                                   href="#">Kansai</a>
                             </div>
                         </div>
                     </div>
@@ -215,14 +215,14 @@ class EquipmentsPage extends React.Component {
                                      willChange: 'top, left'
                                  }}>
                                 <a className="dropdown-item"
-                                   onClick={()=>{this.toggleSelect("machineType","1")}}
-                                   href="#">1</a>
+                                   onClick={()=>{this.toggleSelect("machineType","Оверлок")}}
+                                   href="#">Оверлок</a>
                                 <a className="dropdown-item"
-                                   onClick={()=>{this.toggleSelect("machineType","2")}}
-                                   href="#">2</a>
+                                   onClick={()=>{this.toggleSelect("machineType","Кнопочная машина")}}
+                                   href="#">Кнопочная машина</a>
                                 <a className="dropdown-item"
-                                   onClick={()=>{this.toggleSelect("machineType","3")}}
-                                   href="#">3</a>
+                                   onClick={()=>{this.toggleSelect("machineType","Петельная машина")}}
+                                   href="#">Петельная машина</a>
                             </div>
                         </div>
                     </div>
@@ -253,14 +253,14 @@ class EquipmentsPage extends React.Component {
                                      willChange: 'top, left'
                                  }}>
                                 <a className="dropdown-item"
-                                   onClick={()=>{this.toggleSelect("machineStatus","Broken")}}
-                                   href="#">Broken</a>
+                                   onClick={()=>{this.toggleSelect("machineStatus","Ручной")}}
+                                   href="#">Ручной</a>
                                 <a className="dropdown-item"
-                                   onClick={()=>{this.toggleSelect("machineStatus","Good")}}
-                                   href="#">Good</a>
+                                   onClick={()=>{this.toggleSelect("machineStatus","Полуавтомат")}}
+                                   href="#">Полуавтомат</a>
                                 <a className="dropdown-item"
-                                   onClick={()=>{this.toggleSelect("machineStatus","New")}}
-                                   href="#">New</a>
+                                   onClick={()=>{this.toggleSelect("machineStatus","Автомат")}}
+                                   href="#">Автомат</a>
                             </div>
                         </div>
                     </div>

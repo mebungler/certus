@@ -91,7 +91,7 @@ var routes = Routes{
 	},
 	Route{
 		Name: "GetCustomers",
-		Method: "POST",
+		Method: "GET",
 		Pattern: "/api/customer",
 		HandlerFunc: handlers.GetCustomers,
 	},
