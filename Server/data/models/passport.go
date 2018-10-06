@@ -1,11 +1,12 @@
 package models
 
 type Passport struct {
-	ID int `gorm:"primary_key" json:"id,omitempty"`
+	ID string `gorm:"primary_key" json:"id,omitempty" "AUTO_INCREMENT"`
+	CodeOfPassport int
 	Customer Customer	`json:"customer"`
-	CustomerID Customer
+	CustomerID string
 	Model Model     `json:"model"`
-	ModelID Model
+	ModelID string
 	Color string	`json:"color"`
 	Size int		`json:"size"`
 	Quantity int   `json:"quantity"`
