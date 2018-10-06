@@ -25,6 +25,7 @@ func AddType(w http.ResponseWriter,r *http.Request)  {
 }
 
 func GetTypeOfClothe(w http.ResponseWriter,r *http.Request)  {
+
 	var typec models.TypeOfCloth
 	decoder.Get(r.Body,&typec)
 	temp,err := database.GetType(typec.ID)

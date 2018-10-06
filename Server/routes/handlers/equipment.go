@@ -6,6 +6,7 @@ import (
 	"../../decoder"
 	"../../logger"
 	"encoding/json"
+	"github.com/gorilla/mux"
 	"net/http"
 )
 
@@ -39,8 +40,8 @@ func GetEquipments(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetEquipment(w http.ResponseWriter, r *http.Request) {
-	var equipment models.Equipment
-	decoder.Get(r.Body, &equipment)
+	params:=mux.Vars(r)
+	equipment := models.Equipment{ID:params["id"]}
 	temp, err := database.GetEquipment(equipment.ID)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)

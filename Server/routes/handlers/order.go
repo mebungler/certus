@@ -4,6 +4,7 @@ import (
 	"../../data/database"
 	"../../logger"
 	"encoding/json"
+	"github.com/gorilla/mux"
 	"net/http"
 	"../../data/models"
 	"../../decoder"
@@ -23,7 +24,8 @@ func AddOrder(w http.ResponseWriter , r *http.Request)  {
 	w.WriteHeader(http.StatusOK)
 }
 func GetOrder(w http.ResponseWriter , r *http.Request)  {
-	var order models.Order
+	params:=mux.Vars(r)
+	order := models.Order{ID:params["id"]}
 	decoder.Get(r.Body, &order)
 	temp := database.Get(&order)
 	if temp != nil {
