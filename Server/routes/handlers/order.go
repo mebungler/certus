@@ -11,7 +11,7 @@ import (
 )
 
 func AddOrder(w http.ResponseWriter , r *http.Request)  {
-	var order models.Model
+	var order models.Order
 	decoder.Get(r.Body, &order)
 	err := database.Add(order)
 	if err != nil {
