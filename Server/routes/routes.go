@@ -39,7 +39,13 @@ var routes = Routes{
 		"UserGet",
 		"GET",
 		"/api/user",
-		handlers.GetUsers,
+		handlers.GetUser,
+	},
+	Route{
+		"GetByID",
+		"GET",
+		"/api/user/{id}",
+		handlers.GetUser,
 	},
 	Route{
 		"ProductGet",
@@ -124,6 +130,49 @@ var routes = Routes{
 		Method: "POST",
 		Pattern: "/api/type",
 		HandlerFunc: handlers.AddType,
+	},
+	Route{
+		Name: "AddOrder",
+		Method: "POST",
+		Pattern: "/api/order",
+		HandlerFunc: handlers.AddOrder,
+	},
+	Route{
+		Name: "GetOrder",
+		Method: "Get",
+		Pattern: "/api/order/{id}",
+		HandlerFunc: handlers.GetOrder,
+	},
+	Route{
+		Name: "GetOrders",
+		Method: "Get",
+		Pattern: "/api/order",
+		HandlerFunc: handlers.GetAllOrders,
+	},
+	Route {
+		Name: "AddPassport",
+		Method: "POST",
+		Pattern: "/api/passport",
+		HandlerFunc: handlers.AddPassport,
+	},
+	Route {
+		Name: "GetPassport",
+		Method: "Get",
+		Pattern: "/api/passport/{id}",
+		HandlerFunc: handlers.GetPassport,
+	},
+	Route {
+		Name: "GetAllPassport",
+		Method: "Get",
+		Pattern: "/api/passport",
+		HandlerFunc: handlers.GetAllPassports,
+	},
+	Route{
+		Name: "AddProperty",
+		Method: "POST",
+		Pattern: "/api/property",
+		HandlerFunc: handlers.AddProperty,
+
 	},
 }
 

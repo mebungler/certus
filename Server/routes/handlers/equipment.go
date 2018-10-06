@@ -12,7 +12,6 @@ import (
 func AddEquipment(w http.ResponseWriter, r *http.Request) {
 	var equipment models.Equipment
 	decoder.Get(r.Body, &equipment)
-
 	err := database.AddEquipment(equipment)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)

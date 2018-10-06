@@ -1,0 +1,56 @@
+package handlers
+
+import (
+	"../../data/database"
+	"../../logger"
+	"encoding/json"
+	"net/http"
+	"../../data/models"
+	"../../decoder"
+)
+
+func AddPassport(w http.ResponseWriter , r *http.Request)  {
+	var passport models.Passport
+	decoder.Get(r.Body, &passport)
+	err := database.Add(passport)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		if err := json.NewEncoder(w).Encode(Response{Errors: Errors{Global: "Failed to create passport:\n" + err.Error()}}); err != nil {
+			logger.LogErr(err)
+		}
+		return
+	}
+	w.WriteHeader(http.StatusOK)
+}
+func GetPassport(w http.ResponseWriter , r *http.Request)  {
+	var passport models.Passport
+	decoder.Get(r.Body, &passport)
+	temp := database.Get(&passport)
+	if temp != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		if temp := json.NewEncoder(w).Encode(Response{Errors: Errors{Global: "Failed to get passport:\n" + temp.Error()}}); temp != nil {
+			logger.LogErr(temp)
+		}
+		return
+	}
+	w.WriteHeader(http.StatusOK)
+	if temp := json.NewEncoder(w).Encode(Response{Passport: []models.Passport{passport}}); temp != nil {
+		logger.LogErr(temp)
+	}
+}
+
+func GetAllPassports(w http.ResponseWriter, r *http.Request)  {
+	passports := []models.Passport{}
+	err :=	database.GetAll(&passports)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		if err := json.NewEncoder(w).Encode(Response{Errors: Errors{Global: "Failed to get passports:\n" + err.Error()}}); err != nil {
+			logger.LogErr(err)
+		}
+		return
+	}
+	w.WriteHeader(http.StatusOK)
+	if err := json.NewEncoder(w).Encode(Response{Passport: passports}); err != nil {
+		logger.LogErr(err)
+	}
+}

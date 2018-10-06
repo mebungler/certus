@@ -17,6 +17,8 @@ func Get(object interface{}) error {
 	return nil
 }
 
+
+
 func GetAll(object interface{}) error{
 	DB.Find(object)
 	if DB.Error != nil {
