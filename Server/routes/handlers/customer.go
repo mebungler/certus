@@ -6,6 +6,7 @@ import (
 	"../../decoder"
 	"../../logger"
 	"encoding/json"
+	"github.com/gorilla/mux"
 	"net/http"
 )
 
@@ -41,7 +42,8 @@ func GetCustomers(w http.ResponseWriter,r *http.Request)  {
 }
 
 func GetCustomer(w http.ResponseWriter, r *http.Request) {
-	var customer models.Customer
+	params:=mux.Vars(r)
+	customer := models.Customer{ID:params["id"]}
 	decoder.Get(r.Body, &customer)
 	temp, err := database.GetCustomer(customer.ID)
 	if err != nil {

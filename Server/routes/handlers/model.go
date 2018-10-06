@@ -4,6 +4,7 @@ import (
 	"../../data/models"
 	"../../decoder"
 	"encoding/json"
+	"github.com/gorilla/mux"
 	"net/http"
 	"../../data/database"
 	"../../logger"
@@ -24,8 +25,8 @@ func AddModel(w http.ResponseWriter,r *http.Request)  {
 }
 
 func GetModel(w http.ResponseWriter,r *http.Request)  {
-	var model models.Model
-	decoder.Get(r.Body,&model)
+	params:=mux.Vars(r)
+	model := models.Model{ID:params["id"]}
 	temp,err := database.GetModel(model.ID)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
