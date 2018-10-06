@@ -177,7 +177,7 @@ var routes = Routes{
 	Route{
 		Name: "GetPassports",
 		Method: "Get",
-		Pattern: "/api/pre/passports",
+		Pattern: "/api/pre/passport",
 		HandlerFunc: handlers.GetAllPrePassports,
 	},
 	Route{
