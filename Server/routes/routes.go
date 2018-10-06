@@ -39,7 +39,7 @@ var routes = Routes{
 		"UserGet",
 		"GET",
 		"/api/user",
-		handlers.GetUser,
+		handlers.GetUsers,
 	},
 	Route{
 		"GetByID",
@@ -173,6 +173,18 @@ var routes = Routes{
 		Pattern: "/api/property",
 		HandlerFunc: handlers.AddProperty,
 
+	},
+	Route{
+		Name: "GetPassports",
+		Method: "Get",
+		Pattern: "/api/pre/passports",
+		HandlerFunc: handlers.GetAllPrePassports,
+	},
+	Route{
+		Name: "GetOrders",
+		Method: "Get",
+		Pattern: "/api/pre/orders",
+		HandlerFunc: handlers.GetAllPreOrder,
 	},
 }
 

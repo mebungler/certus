@@ -54,3 +54,23 @@ func GetAllOrders(w http.ResponseWriter, r *http.Request)  {
 		logger.LogErr(err)
 	}
 }
+
+func GetAllPreOrder(w http.ResponseWriter, r *http.Request)  {
+	orders := []models.Order{}
+	err := database.GetAllWithEagerLoading(&orders,"Customer")
+	database.GetAllWithEagerLoading(&orders,"TypeOfCloth")
+	database.GetAllWithEagerLoading(&orders,"ActionOnModel")
+	database.GetAllWithEagerLoading(&orders,"Order")
+
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		if err := json.NewEncoder(w).Encode(Response{Errors: Errors{Global: "Failed to get models:\n" + err.Error()}}); err != nil {
+			logger.LogErr(err)
+		}
+		return
+	}
+	w.WriteHeader(http.StatusOK)
+	if err := json.NewEncoder(w).Encode(Response{Order: orders}); err != nil {
+		logger.LogErr(err)
+	}
+}

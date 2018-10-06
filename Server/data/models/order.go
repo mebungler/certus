@@ -8,6 +8,8 @@ type Order struct {
 	TypeOfClothID string
 	ActionOnModel ActionOnModel `json:"actionOnModel"`
 	ActionOnModelID string
+	Order Order 	`json:"order"`
+	OrderID string
 	Property 	  []Property `json:"property"`
 
 
