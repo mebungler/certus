@@ -30,7 +30,7 @@ class TimerPage extends React.Component {
             }, 1000)
         } else {
             let i=parseInt(this.state.minutes*60+this.state.seconds);
-            api.seamstress.addOperation({id: uuid(), time_span: i, product_id: this.props.product.ID}).then();
+            api.operation.addOperation({id: uuid(), time_span: i, product_id: this.props.product.ID}).then();
         }
     };
 
@@ -70,9 +70,9 @@ class TimerPage extends React.Component {
 }
 
 function mapStateToProps(state) {
-    console.log(state.seamstress.product);
+    console.log(state.operation.product);
     return {
-        product: state.seamstress.product
+        product: state.operation.product
     }
 }
 

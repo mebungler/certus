@@ -4,7 +4,7 @@ import { url } from "../../api/api";
 export default user => {
   let imageUrl = url + "/public/images/user/" + user.id;
   let icon = "fa fa-tshirt";
-  let usrType = "seamstress";
+  let usrType = "operation";
   switch (user.type) {
     case 1:
       usrType = "Cutter";
@@ -12,7 +12,7 @@ export default user => {
       break;
     case 2:
       icon = "fa fa-tshirt";
-      usrType = "seamstress";
+      usrType = "operation";
       break;
     case 3:
       usrType = "Controller";

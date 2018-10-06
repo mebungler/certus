@@ -10,10 +10,11 @@ import ScanPage from "../components/seamstress/ScanPage";
 import EquipmentsPage from "../components/equipment/EquipmentsPage";
 import TimerPage from "../components/seamstress/TimerPage";
 import AdminRoute from "../routes/AdminRoute";
-
+import CustomerPage from "../components/customer/CustomerPage"
 import "../assets/css/material-dashboard-react.css";
 import "../assets/css/css.css";
 import OperationsPage from "../components/operation/OperationsPage";
+import ModelPage from "../components/model/ModelPage"
 
 const AppRouter = ({ location }) => (
   <div className="wrapper">
@@ -27,12 +28,14 @@ const AppRouter = ({ location }) => (
         path="/equipments"
         component={EquipmentsPage}
       />
+      <Route location={location} path="/models" component={ModelPage}/>
       <Route location={location} path="/users" component={UsersPage} />
-      <AdminRoute
+      <Route
         location={location}
         path="/operations"
         component={OperationsPage}
       />
+        <Route location={location} path="/customers" component={CustomerPage}/>
       <Route location={location} component={NotFoundPage} />
     </Switch>
   </div>

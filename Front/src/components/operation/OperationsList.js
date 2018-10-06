@@ -6,7 +6,7 @@ import OperationItem from "./OperationItem";
 
 class OperationsList extends React.Component {
     componentDidMount() {
-        api.seamstress.getOperations().then(res => {
+        api.operation.getOperations().then(res => {
             console.log(res);
             this.props.dispatch(PopulateOperations(res.data.operations));
         }).catch(err => console.log(err));
@@ -114,7 +114,7 @@ class OperationsList extends React.Component {
 function mapStateToProps(state) {
     console.log(state);
     return {
-        operations:state.seamstress.operations
+        operations:state.operation.operations
     }
 }
 
