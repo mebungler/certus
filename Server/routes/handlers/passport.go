@@ -4,6 +4,7 @@ import (
 	"../../data/database"
 	"../../logger"
 	"encoding/json"
+	"github.com/gorilla/mux"
 	"net/http"
 	"../../data/models"
 	"../../decoder"
@@ -23,8 +24,8 @@ func AddPassport(w http.ResponseWriter , r *http.Request)  {
 	w.WriteHeader(http.StatusOK)
 }
 func GetPassport(w http.ResponseWriter , r *http.Request)  {
-	var passport models.Passport
-	decoder.Get(r.Body,&passport)
+	params:=mux.Vars(r)
+	passport := models.Passport{ID:params["id"]}
 	temp := database.Get(&passport)
 	if temp != nil {
 		w.WriteHeader(http.StatusInternalServerError)
