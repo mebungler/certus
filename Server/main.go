@@ -25,14 +25,11 @@ func main() {
 	op := []models.Operation{}
 	database.Remove(&eq)
 	fmt.Println(op)
-<<<<<<< HEAD
 	database.Add(models.Model{ID:"123231ds34343dd23232s",CodeOfModel:"wwwe232w"})
 	customer_1 := []models.Model{}
 	database.Add(models.Customer{CustomerName:"Кораблик",ContactNumber:"something",Email:"test@gmail.com",ID:"1112dd"})
 	database.Add(models.Model{ID:"ddddModel111",CustomerID:"1112dd",CodeOfModel:"11112233"})
 	database.Add(models.Passport{Color:"red",Quantity:500,Size:12,CustomerID:"1112dd",ModelID:"ddddModel111",CodeOfPassport:1,ID:"2323232ddd"})
-=======
->>>>>>> 3fbdb7a6d60946b18b3754b9ee93265ed3420d94
 	// database.GetAllOperations()
 //	fmt.Println(ddd[0].Equipment.Name)
 
