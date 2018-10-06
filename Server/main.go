@@ -30,6 +30,7 @@ func main() {
 	database.Add(models.Customer{CustomerName:"Кораблик",ContactNumber:"something",Email:"test@gmail.com",ID:"1112dd"})
 	database.Add(models.Model{ID:"ddddModel111",CustomerID:"1112dd",CodeOfModel:"11112233"})
 	database.Add(models.Passport{Color:"red",Quantity:500,Size:12,CustomerID:"1112dd",ModelID:"ddddModel111",CodeOfPassport:1,ID:"2323232ddd"})
+	database.Add(models.Order{ID:"ddd222",ModelID:"ddddModel111",CustomerID:"1112dd",CodeOfModel:"11112233"})
 	// database.GetAllOperations()
 //	fmt.Println(ddd[0].Equipment.Name)
 
