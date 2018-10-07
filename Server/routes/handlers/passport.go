@@ -77,6 +77,7 @@ func GetAllPrePassports(w http.ResponseWriter, r *http.Request) {
 func GetOnePrePassport(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	passport := models.Passport{ID: params["id"]}
+	database.GetAllWithEagerLoading(&passport, params["component"])
 	temp := database.Get(&passport)
 	if temp != nil {
 		w.WriteHeader(http.StatusInternalServerError)

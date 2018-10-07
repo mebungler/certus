@@ -1,10 +1,10 @@
 package routes
 
 import (
-	"net/http"
+	"./handlers"
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
-	"./handlers"
+	"net/http"
 )
 
 type Route struct {
@@ -84,133 +84,136 @@ var routes = Routes{
 		handlers.GetEquipment,
 	},
 	Route{
-		Name: "CustomerAdd",
-		Method: "POST",
-		Pattern: "/api/customer",
+		Name:        "CustomerAdd",
+		Method:      "POST",
+		Pattern:     "/api/customer",
 		HandlerFunc: handlers.AddCustomer,
 	},
 	Route{
-		Name: "GetCustomers",
-		Method: "GET",
-		Pattern: "/api/customer",
+		Name:        "GetCustomers",
+		Method:      "GET",
+		Pattern:     "/api/customer",
 		HandlerFunc: handlers.GetCustomers,
 	},
 	Route{
-		Name: "GetCustomer",
-		Method: "Get",
-		Pattern: "/api/customer/{id}",
+		Name:        "GetCustomer",
+		Method:      "Get",
+		Pattern:     "/api/customer/{id}",
 		HandlerFunc: handlers.GetCustomer,
 	},
 	Route{
-		Name: "ModelAdd",
-		Method: "POST",
-		Pattern: "/api/model",
+		Name:        "ModelAdd",
+		Method:      "POST",
+		Pattern:     "/api/model",
 		HandlerFunc: handlers.AddModel,
 	},
 	Route{
-		Name: "GetModels",
-		Method: "Get",
-		Pattern: "/api/model",
+		Name:        "GetModels",
+		Method:      "Get",
+		Pattern:     "/api/model",
 		HandlerFunc: handlers.GetModels,
 	},
 	Route{
-		Name: "GetModels",
-		Method: "Get",
-		Pattern: "/api/pre/model",
+		Name:        "GetModels",
+		Method:      "Get",
+		Pattern:     "/api/pre/model",
 		HandlerFunc: handlers.GetAllPre,
 	},
 	Route{
-		Name: "GetModel",
-		Method: "Get",
-		Pattern: "/api/model/{id}",
+		Name:        "GetModel",
+		Method:      "Get",
+		Pattern:     "/api/model/{id}",
 		HandlerFunc: handlers.GetModel,
 	},
 	Route{
-		Name: "AddTypeClothe",
-		Method: "POST",
-		Pattern: "/api/type",
+		Name:        "AddTypeClothe",
+		Method:      "POST",
+		Pattern:     "/api/type",
 		HandlerFunc: handlers.AddType,
 	},
 	Route{
-		Name: "AddOrder",
-		Method: "POST",
-		Pattern: "/api/order",
+		Name:        "AddOrder",
+		Method:      "POST",
+		Pattern:     "/api/order",
 		HandlerFunc: handlers.AddOrder,
 	},
 	Route{
-		Name: "GetOrder",
-		Method: "Get",
-		Pattern: "/api/order/{id}",
+		Name:        "GetOrder",
+		Method:      "Get",
+		Pattern:     "/api/order/{id}",
 		HandlerFunc: handlers.GetOrder,
 	},
 	Route{
-		Name: "GetOrders",
-		Method: "Get",
-		Pattern: "/api/order",
+		Name:        "GetOrders",
+		Method:      "Get",
+		Pattern:     "/api/order",
 		HandlerFunc: handlers.GetAllOrders,
 	},
-	Route {
-		Name: "AddPassport",
-		Method: "POST",
-		Pattern: "/api/passport",
+	Route{
+		Name:        "AddPassport",
+		Method:      "POST",
+		Pattern:     "/api/passport",
 		HandlerFunc: handlers.AddPassport,
 	},
-	Route {
-		Name: "GetPassport",
-		Method: "Get",
-		Pattern: "/api/passport/{id}",
+	Route{
+		Name:        "GetPassport",
+		Method:      "Get",
+		Pattern:     "/api/passport/{id}",
 		HandlerFunc: handlers.GetPassport,
 	},
-	Route {
-		Name: "GetAllPassport",
-		Method: "Get",
-		Pattern: "/api/passport",
+	Route{
+		Name:        "GetAllPassport",
+		Method:      "Get",
+		Pattern:     "/api/passport",
 		HandlerFunc: handlers.GetAllPassports,
 	},
 	Route{
-		Name: "AddProperty",
-		Method: "POST",
-		Pattern: "/api/property",
+		Name:        "AddProperty",
+		Method:      "POST",
+		Pattern:     "/api/property",
 		HandlerFunc: handlers.AddProperty,
-
 	},
 	Route{
-		Name: "GetPassports",
-		Method: "Get",
-		Pattern: "/api/pre/passport/{component}",
+		Name:        "GetPassports",
+		Method:      "Get",
+		Pattern:     "/api/pre/passports/{component}",
 		HandlerFunc: handlers.GetAllPrePassports,
 	},
 	Route{
-		Name: "GetOrders",
-		Method: "Get",
-		Pattern: "/api/pre/order",
+		Name:        "GetOrders",
+		Method:      "Get",
+		Pattern:     "/api/pre/order",
 		HandlerFunc: handlers.GetAllPreOrder,
 	},
 	Route{
-		Name: "GetOperations",
-		Method: "Get",
-		Pattern: "/api/pre/operation/{component}",
+		Name:        "GetOperations",
+		Method:      "Get",
+		Pattern:     "/api/pre/operation/{component}",
 		HandlerFunc: handlers.GetAllPreOperation,
 	},
 	Route{
-		Name: "AddFinishedOperation",
-		Method: "POST",
-		Pattern: "/api/finishedoperation",
+		Name:        "AddFinishedOperation",
+		Method:      "POST",
+		Pattern:     "/api/finishedoperation",
 		HandlerFunc: handlers.AddFinOperation,
-
 	},
 	Route{
-		Name: "GetFinishedOperation",
-		Method: "Get",
-		Pattern: "/api/finishedOperation/{id}",
+		Name:        "GetFinishedOperation",
+		Method:      "Get",
+		Pattern:     "/api/finishedOperation/{id}",
 		HandlerFunc: handlers.GetFinishedOperation,
 	},
 	Route{
-		Name: "GetPreOperations",
-		Method: "Get",
-		Pattern: "/api/pre/finishedoperation/{component}",
+		Name:        "GetPreOperations",
+		Method:      "Get",
+		Pattern:     "/api/pre/finishedoperation/{component}",
 		HandlerFunc: handlers.GetAllPreFinishedOperations,
-
+	},
+	Route{
+		Name:        "GetOnePreOperations",
+		Method:      "Get",
+		Pattern:     "/api/pre/operation/{component}",
+		HandlerFunc: handlers.GetOnePrePassport,
 	},
 }
 
@@ -218,7 +221,7 @@ func NewRouter() http.Handler {
 	router := mux.NewRouter().StrictSlash(true)
 	c := cors.New(cors.Options{
 		AllowedOrigins: []string{"*"}, // All origins
-		AllowedMethods: []string{"GET","POST","PUT","DELETE"},
+		AllowedMethods: []string{"GET", "POST", "PUT", "DELETE"},
 	})
 
 	for _, route := range routes {
