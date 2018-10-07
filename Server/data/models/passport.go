@@ -7,6 +7,8 @@ type Passport struct {
 	CustomerID string
 	Model Model        `json:"model"`
 	ModelID string
+	Oreder Order `json:"oreder,omitempty"`
+	OrderID string
 	Color string	   `json:"color"`
 	Size int		   `json:"size"`
 	Quantity int       `json:"quantity"`

@@ -32,8 +32,7 @@ func main() {
 	database.Add(models.ActionOnModel{ID: "3", OperationID: "2323232", EquipmentID: "123456788", ModelID: "ddddModel111"})
 	database.Add(models.Customer{CustomerName: "Кораблик", ContactNumber: "something", Email: "test@gmail.com", ID: "1112dd"})
 	database.Add(models.Model{ID: "ddddModel111", CustomerID: "1112dd", CodeOfModel: "11112233"})
-	m1 := models.Model{ID: "ddddModel111", CustomerID: "1112dd", CodeOfModel: "11112233"}
-	database.Add(models.Passport{Color: "red", Quantity: 500, Size: 12, CustomerID: "1112dd", Model:m1, CodeOfPassport: 1, ID: "2323232ddd"})
+	database.Add(models.Passport{Color: "red", Quantity: 500, Size: 12, CustomerID: "1112dd", ModelID: "ddddModel111", CodeOfPassport: 1, ID: "2323232ddd"})
 	database.Add(models.Order{ID: "ddd222", ModelID: "ddddModel111", CustomerID: "1112dd", CodeOfModel: "11112233"})
 	database.Add(models.FinishedOperation{ID: "some1", ModelID: "ddddModel111", UserID: "1234", OrderID: "ddd222"})
 	// database.GetAllOperations()
