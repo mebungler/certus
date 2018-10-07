@@ -186,6 +186,32 @@ var routes = Routes{
 		Pattern: "/api/pre/order",
 		HandlerFunc: handlers.GetAllPreOrder,
 	},
+	Route{
+		Name: "GetOperations",
+		Method: "Get",
+		Pattern: "/api/pre/operation/{component}",
+		HandlerFunc: handlers.GetAllPreOperation,
+	},
+	Route{
+		Name: "AddFinishedOperation",
+		Method: "POST",
+		Pattern: "/api/finishedoperation",
+		HandlerFunc: handlers.AddFinOperation,
+
+	},
+	Route{
+		Name: "GetFinishedOperation",
+		Method: "Get",
+		Pattern: "/api/finishedOperation/{id}",
+		HandlerFunc: handlers.GetFinishedOperation,
+	},
+	Route{
+		Name: "GetPreOperations",
+		Method: "Get",
+		Pattern: "/api/pre/finishedoperation/{component}",
+		HandlerFunc: handlers.GetAllPreFinishedOperations,
+
+	},
 }
 
 func NewRouter() http.Handler {
