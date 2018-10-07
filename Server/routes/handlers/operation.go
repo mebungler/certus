@@ -2,8 +2,10 @@ package handlers
 
 import (
 	"../../decoder"
+	"../../data/models"
 	"../../data/database"
 	"../../logger"
+	"github.com/gorilla/mux"
 	"net/http"
 	"encoding/json"
 	"io/ioutil"
@@ -32,6 +34,26 @@ func GetOperations(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		if err := json.NewEncoder(w).Encode(Response{Errors: Errors{Global: "Failed to get operations:\n" + err.Error()}}); err != nil {
+			logger.LogErr(err)
+		}
+		return
+	}
+	w.WriteHeader(http.StatusOK)
+	if err := json.NewEncoder(w).Encode(Response{Operations: operations}); err != nil {
+		logger.LogErr(err)
+	}
+}
+
+
+
+func GetAllPreOperation(w http.ResponseWriter, r *http.Request)  {
+	params:=mux.Vars(r)
+	operations := []models.Operation{}
+	err := database.GetAllWithEagerLoading(&operations,params["ccomponent"])
+
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		if err := json.NewEncoder(w).Encode(Response{Errors: Errors{Global: "Failed to get passports:\n" + err.Error()}}); err != nil {
 			logger.LogErr(err)
 		}
 		return

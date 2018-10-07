@@ -1,13 +1,12 @@
 package models
 
 type Operation struct {
-	ID string `gorm:"primary_key" json:"id,omitempty"`
-	ProductID string `json:"productID"`
-	TimeSpan int `json:"time_span"`
-	Equipment Equipment `json:"equipment"`
-	EquipmentID string
-	Number int `json:"number"`
-	SeamstressPriority int `json:"seamstressPriority"`
-	Name string `json:"name"`
-	Cycle int `json:"cycle"`
+	ID                 string    `gorm:"primary_key" json:"id,omitempty"`
+	IdealTime          int       `json:"idealTime"`
+	Equipment          Equipment `json:"equipment"`
+	EquipmentID        string
+	Number             int    `json:"numOfOperation"`
+	SeamstressPriority int    `json:"seamstressPriority"`
+	Name               string `json:"name"`
+	RealTime           int    `json:"realTime"`
 }

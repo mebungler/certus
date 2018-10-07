@@ -17,5 +17,6 @@ type Response struct {
 	TypeOfCloth []models.TypeOfCloth `json:"typeofclothe,omitempty"`
 	Order 		[]models.Order 		 `josn:"order,omitempty"`
 	Passport 	[]models.Passport 	 `josn:"passport,omitempty"`
+	FinishedOperation 	[]models.FinishedOperation 	 `josn:"finishedOperation,omitempty"`
 
 }
