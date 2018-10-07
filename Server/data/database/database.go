@@ -25,8 +25,8 @@ func ConnectAndCreate(databaseType,connectionString string) {
 	DB.AutoMigrate(&models.Model{})
 	DB.AutoMigrate(&models.Order{})
 	DB.AutoMigrate(&models.Passport{})
-
 	DB.AutoMigrate(&models.Property{})
+	DB.AutoMigrate(&models.FinishedOperation{})
 	DB.LogMode(true)
 }
 
