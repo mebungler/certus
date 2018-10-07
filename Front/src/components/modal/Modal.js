@@ -47,7 +47,7 @@ class Modal extends React.Component {
                 className="modal fade show"
                 tabIndex="-1"
                 role="dialog"
-                style={{display: visibility, padding: "17px", marginLeft: "20%"}}
+                style={{display: visibility, padding: "17px", marginLeft: "20%", overflowY: "scroll"}}
             >
                 <div className="col-md-8 col-12 mr-auto ml-auto">
                     <div className="wizard-container">

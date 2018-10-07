@@ -133,9 +133,9 @@ class EquipmentsPage extends React.Component {
             <div className="col-md-6">
                 <div className="input-group form-control-lg">
                     <div className="input-group-prepend">
-            <span className="input-group-text">
-              <i className="fa fa-user"/>
-            </span>
+                <span className="input-group-text">
+                  <i className="fa fa-user"/>
+                </span>
                     </div>
                     <div className="form-group bmd-form-group">
                         <input
@@ -153,9 +153,9 @@ class EquipmentsPage extends React.Component {
                 </div>
                 <div className="input-group form-control-lg">
                     <div className="input-group-prepend">
-                        <span className="input-group-text">
-              <i className="fa fa-key"/>
-            </span>
+                            <span className="input-group-text">
+                  <i className="fa fa-key"/>
+                </span>
                     </div>
                     <div className="form-group bmd-form-group">
                         <div className="dropdown">
@@ -177,13 +177,19 @@ class EquipmentsPage extends React.Component {
                                      willChange: 'top, left'
                                  }}>
                                 <a className="dropdown-item"
-                                   onClick={()=>{this.toggleSelect("brand","Jack")}}
+                                   onClick={() => {
+                                       this.toggleSelect("brand", "Jack")
+                                   }}
                                    href="#">Jack</a>
                                 <a className="dropdown-item"
-                                   onClick={()=>{this.toggleSelect("brand","Juki")}}
+                                   onClick={() => {
+                                       this.toggleSelect("brand", "Juki")
+                                   }}
                                    href="#">Juki</a>
                                 <a className="dropdown-item"
-                                   onClick={()=>{this.toggleSelect("brand","Kansai")}}
+                                   onClick={() => {
+                                       this.toggleSelect("brand", "Kansai")
+                                   }}
                                    href="#">Kansai</a>
                             </div>
                         </div>
@@ -191,9 +197,9 @@ class EquipmentsPage extends React.Component {
                 </div>
                 <div className="input-group form-control-lg">
                     <div className="input-group-prepend">
-                        <span className="input-group-text">
-              <i className="fa fa-key"/>
-            </span>
+                            <span className="input-group-text">
+                  <i className="fa fa-key"/>
+                </span>
                     </div>
                     <div className="form-group bmd-form-group">
                         <div className="dropdown">
@@ -215,13 +221,19 @@ class EquipmentsPage extends React.Component {
                                      willChange: 'top, left'
                                  }}>
                                 <a className="dropdown-item"
-                                   onClick={()=>{this.toggleSelect("machineType","Оверлок")}}
+                                   onClick={() => {
+                                       this.toggleSelect("machineType", "Оверлок")
+                                   }}
                                    href="#">Оверлок</a>
                                 <a className="dropdown-item"
-                                   onClick={()=>{this.toggleSelect("machineType","Кнопочная машина")}}
+                                   onClick={() => {
+                                       this.toggleSelect("machineType", "Кнопочная машина")
+                                   }}
                                    href="#">Кнопочная машина</a>
                                 <a className="dropdown-item"
-                                   onClick={()=>{this.toggleSelect("machineType","Петельная машина")}}
+                                   onClick={() => {
+                                       this.toggleSelect("machineType", "Петельная машина")
+                                   }}
                                    href="#">Петельная машина</a>
                             </div>
                         </div>
@@ -229,9 +241,9 @@ class EquipmentsPage extends React.Component {
                 </div>
                 <div className="input-group form-control-lg">
                     <div className="input-group-prepend">
-                        <span className="input-group-text">
-              <i className="fa fa-key"/>
-            </span>
+                            <span className="input-group-text">
+                  <i className="fa fa-key"/>
+                </span>
                     </div>
                     <div className="form-group bmd-form-group">
                         <div className="dropdown">
@@ -253,13 +265,19 @@ class EquipmentsPage extends React.Component {
                                      willChange: 'top, left'
                                  }}>
                                 <a className="dropdown-item"
-                                   onClick={()=>{this.toggleSelect("machineStatus","Ручной")}}
+                                   onClick={() => {
+                                       this.toggleSelect("machineStatus", "Ручной")
+                                   }}
                                    href="#">Ручной</a>
                                 <a className="dropdown-item"
-                                   onClick={()=>{this.toggleSelect("machineStatus","Полуавтомат")}}
+                                   onClick={() => {
+                                       this.toggleSelect("machineStatus", "Полуавтомат")
+                                   }}
                                    href="#">Полуавтомат</a>
                                 <a className="dropdown-item"
-                                   onClick={()=>{this.toggleSelect("machineStatus","Автомат")}}
+                                   onClick={() => {
+                                       this.toggleSelect("machineStatus", "Автомат")
+                                   }}
                                    href="#">Автомат</a>
                             </div>
                         </div>
