@@ -59,7 +59,7 @@ func GetAllFinishedOperations(w http.ResponseWriter, r *http.Request)  {
 func GetAllPreFinishedOperations(w http.ResponseWriter, r *http.Request)  {
 	params:=mux.Vars(r)
 	finishedOperation := []models.FinishedOperation{}
-	err := database.GetAllWithEagerLoading(&finishedOperation,params["ccomponent"])
+	err := database.GetAllWithEagerLoading(&finishedOperation,params["component"])
 
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)

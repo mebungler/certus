@@ -59,7 +59,7 @@ func GetAllPassports(w http.ResponseWriter, r *http.Request)  {
 func GetAllPrePassports(w http.ResponseWriter, r *http.Request)  {
 	params:=mux.Vars(r)
 	passports := []models.Passport{}
-	err := database.GetAllWithEagerLoading(&passports,params["ccomponent"])
+	err := database.GetAllWithEagerLoading(&passports,params["component"])
 
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)

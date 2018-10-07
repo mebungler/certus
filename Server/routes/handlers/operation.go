@@ -49,7 +49,7 @@ func GetOperations(w http.ResponseWriter, r *http.Request) {
 func GetAllPreOperation(w http.ResponseWriter, r *http.Request)  {
 	params:=mux.Vars(r)
 	operations := []models.Operation{}
-	err := database.GetAllWithEagerLoading(&operations,params["ccomponent"])
+	err := database.GetAllWithEagerLoading(&operations,params["component"])
 
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
