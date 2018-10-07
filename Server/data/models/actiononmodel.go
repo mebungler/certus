@@ -6,4 +6,5 @@ type ActionOnModel struct {
 	Operation Operation
 	EquipmentID string
 	OperationID string
+	ModelID string
 } 
