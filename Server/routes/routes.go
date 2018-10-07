@@ -210,9 +210,9 @@ var routes = Routes{
 		HandlerFunc: handlers.GetAllPreFinishedOperations,
 	},
 	Route{
-		Name:        "GetOnePreOperations",
+		Name:        "GetOnePrePassport",
 		Method:      "Get",
-		Pattern:     "/api/pre/operation/{component}",
+		Pattern:     "/api/pre/passport/{component}",
 		HandlerFunc: handlers.GetOnePrePassport,
 	},
 }
