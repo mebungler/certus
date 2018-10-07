@@ -200,11 +200,17 @@ var routes = Routes{
 	Route{
 		Name:        "GetFinishedOperation",
 		Method:      "Get",
-		Pattern:     "/api/finishedOperation/{id}",
+		Pattern:     "/api/finishedoperation/{id}",
 		HandlerFunc: handlers.GetFinishedOperation,
 	},
 	Route{
-		Name:        "GetPreOperations",
+		Name:        "GetFinishedOperations",
+		Method:      "Get",
+		Pattern:     "/api/finishedoperation",
+		HandlerFunc: handlers.GetAllFinishedOperations,
+	},
+	Route{
+		Name:        "GetPreFinOperations",
 		Method:      "Get",
 		Pattern:     "/api/pre/finishedoperation/{component}",
 		HandlerFunc: handlers.GetAllPreFinishedOperations,
