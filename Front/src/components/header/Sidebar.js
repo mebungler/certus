@@ -60,10 +60,10 @@ const Sidebar = () => {
                     </div>
                     <ul className="nav">
                         <li className="nav-item active-pro">
-                            <a className="nav-link" href="#">
+                            <NavLink className="nav-link" href="#" to="/orders">
                                 <i className="material-icons">settings</i>
-                                <p>Закази</p>
-                            </a>
+                                <p>Order</p>
+                            </NavLink>
                         </li>
                         <li className="nav-item ">
                             <a
@@ -179,8 +179,9 @@ const Sidebar = () => {
                     style={{backgroundImage: "url(./assets/img/sidebar-4.jpg)"}}
                 />
             </div>
-        </div>
-    );
-};
+            <
+            /div>
+            );
+            };
 
-export default Sidebar;
+            export default Sidebar;

@@ -69,12 +69,26 @@ export default {
             axios.post(url+"/api/customer",credentials)
                 .then(res=>res)
                 .catch(err=>err.response),
-        getAll:(credentials)=>
-            axios.get(url+"/api/customer",credentials).then(res=>{
+        getAll:()=>
+            axios.get(url+"/api/customer").then(res=>{
                 return res
             }).catch(err=>err.response),
-        getPreAll:(credentials)=>
+        preGetAll:(credentials)=>
             axios.get(url+"/api/pre/customer",credentials).then(res=>{
+                return res
+            }).catch(err=>err.response)
+    },
+    order:{
+        add:(credentials)=>
+            axios.post(url+"/api/order",credentials)
+                .then(res=>res)
+                .catch(err=>err.response),
+        getAll:()=>
+            axios.get(url+"/api/order").then(res=>{
+                return res
+            }).catch(err=>err.response),
+        preGetAll:(credentials)=>
+            axios.get(url+"/api/pre/order",credentials).then(res=>{
                 return res
             }).catch(err=>err.response)
     }

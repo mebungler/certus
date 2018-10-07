@@ -76,7 +76,7 @@ export default class List extends React.Component {
             <table className="table table-shopping">
               <Header />
               <tbody>
-                {this.props.items.map((item, index) => {
+                {this.props.items&&this.props.items.map((item, index) => {
                   return <Item key={index} {...item} edit={this.props.edit} />;
                 })}
                 <tr>

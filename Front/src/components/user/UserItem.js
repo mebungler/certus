@@ -36,7 +36,7 @@ export default user => {
         />
       </td>
       <td className="td-name">
-        <a href="#" onClick={() => user.editUser(user)}>
+        <a href="#" onClick={() => user.edit(user)}>
           {user.firstName} {user.lastName}
         </a>
         <br />

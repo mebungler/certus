@@ -78,27 +78,18 @@ class ModelPage extends React.Component {
 
     };
 
-    toggleSelect = (name, value) => {
-        this.setState({
-            ...this.state,
-            model: {
-                ...this.state.model,
-                [name]: value
-            }
-        });
-    };
-
-    toggleObjSelect = (name, value, object) => {
-        this.setState({
-            ...this.state,
-            model: {
-                ...this.state.model,
-                [object]: {
-                    [name]: value
+    toggleCustomerSelect = (index) => {
+        this.setState((prevState) => {
+            return {
+                ...prevState,
+                model: {
+                    ...prevState.model,
+                    customer: prevState.customers[index]
                 }
             }
         })
     };
+
 
     populateModels = () => {
         api.model.preGetAll().then(res => {
@@ -134,15 +125,7 @@ class ModelPage extends React.Component {
         })
     };
 
-    textInputChange = (e) => {
-        this.setState({
-            ...this.state,
-            model: {
-                ...this.state.model,
-                [e.target.name]: e.target.value
-            },
-        })
-    };
+
 
     closeModal = () => {
         this.setState((prevState) => {
@@ -167,16 +150,16 @@ class ModelPage extends React.Component {
     addRequest = () => {
         api.model.add(this.state.model).then(res => {
             console.log(res);
-            if (res.data.errors || res.data.errors !== {}) {
+            if (res.data.errors && res.data.errors !== {}) {
                 this.setState({
                     ...this.state,
                     errors: {
                         global: res.data.errors.global
                     }
                 });
-                this.closeModal();
-                this.populateModels();
             }
+            this.closeModal();
+            this.populateModels();
         });
     };
 
@@ -200,9 +183,9 @@ class ModelPage extends React.Component {
                                         this.state.modal.visibility === 'block' &&
                                         <Modal
                                             item={this.state.model}
-                                            tabs={['AboutTemplate', 'Actions']}
+                                            tabs={['Actions']}
                                             visibility={this.state.modal.visibility}
-                                            items={[this.aboutTemplate, this.actions]}
+                                            items={[ this.actions]}
                                             closeModal={this.closeModal}
                                             addObject={this.addRequest}
                                         />
@@ -244,16 +227,13 @@ class ModelPage extends React.Component {
         });
     };
 
-    toggleEquipmentSelect = (name, actionIndex) => {
-        let list = this.state.model.actionOnModel;
-        list[actionIndex].equipment.machineType = name;
-        console.log(name + actionIndex);
+    toggleEquipmentSelect = (name) => {
         this.setState((prevState) => {
             return {
                 ...prevState,
                 model: {
                     ...prevState.model,
-                    actionOfModel: [list]
+                    equipment:name
                 }
             }
         })
@@ -302,7 +282,7 @@ class ModelPage extends React.Component {
                                                     return (
                                                         <a className="dropdown-item"
                                                            onClick={() => {
-                                                               this.toggleEquipmentSelect(i.machineType, index)
+                                                               this.toggleSelect(i,i.target.value)
                                                            }}
                                                            href="#">{i.machineType}</a>
                                                     );
@@ -405,156 +385,6 @@ class ModelPage extends React.Component {
         })
     };
 
-    aboutTemplate = (props) => {
-        return (
-            <div className="row justify-content-center">
-                <div className="col-sm-12">
-                    <h5 className="info-text"> Enter info about Model </h5>
-                </div>
-                <div className="col-md-6">
-                    <div className="text-center">
-                        <h4 className="text-center">Auto generated QR code</h4>
-                        <div className="text-center">
-                            <QRCode className="text-center" value={props.content.id}/>
-                        </div>
-                        <div className="text-center">
-                            <button
-                                // onClick={this.saveQrCode}
-                                className="btn btn-rose btn-round btn-fab"
-                            >
-                                <i className="material-icons">save</i>
-                                <div className="ripple-container"/>
-                            </button>
-                            <ReactToPrint
-                                content={() => (
-                                    <QRCode className="text-center" value={props.content.id}/>
-                                )}
-                                trigger={() => (
-                                    <button className="btn btn-rose btn-round btn-fab">
-                                        <i className="material-icons">print</i>
-                                        <div className="ripple-container"/>
-                                    </button>
-                                )}
-                            />
-                        </div>
-                    </div>
-                </div>
-                <div className="col-md-6">
-                    <div className="input-group form-control-lg">
-                        <div className="input-group-prepend">
-            <span className="input-group-text">
-              <i className="fa fa-user"/>
-            </span>
-                        </div>
-                        <div className="form-group bmd-form-group">
-                            <input
-                                className="form-control"
-                                id="exampleInput11"
-                                name="codeOfModel"
-                                placeholder="Number of Model"
-                                required=""
-                                aria-required="true"
-                                type="text"
-                                // equipment.name
-                                value={props.content.codeOfModel}
-                                onChange={this.textInputChange}
-                            />
-                        </div>
-                    </div>
-                    <div className="input-group form-control-lg">
-                        <div className="input-group-prepend">
-                        <span className="input-group-text">
-              <i className="fa fa-key"/>
-            </span>
-                        </div>
-                        <div className="form-group bmd-form-group">
-                            <div className="dropdown">
-                                <button
-                                    className="dropdown-toggle btn btn-primary btn-round btn-block"
-                                    type="button" id="dropdownMenuButton"
-                                    data-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false">
-                                    {/*brand*/}
-                                    {props.content.customer.customerName}
-                                    <div className="ripple-container"/>
-                                </button>
-                                <div className="dropdown-menu"
-                                     aria-labelledby="dropdownMenuButton"
-                                     x-placement="bottom-start"
-                                     style={{
-                                         position: 'absolute',
-                                         top: '41px',
-                                         left: '1px',
-                                         willChange: 'top, left'
-                                     }}>
-                                    <a className="dropdown-item"
-                                       onClick={() => {
-                                           this.toggleObjSelect("customerName", "Customer 1", "customer")
-                                       }}
-                                       href="#">Customer 1</a>
-                                    <a className="dropdown-item"
-                                       onClick={() => {
-                                           this.toggleObjSelect("customerName", "Customer 2", "customer")
-                                       }}
-                                       href="#">Customer 2</a>
-                                    <a className="dropdown-item"
-                                       onClick={() => {
-                                           this.toggleObjSelect("customerName", "Customer 3", "customer")
-                                       }}
-                                       href="#">Customer 3</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="input-group form-control-lg">
-                        <div className="input-group-prepend">
-                        <span className="input-group-text">
-              <i className="fa fa-key"/>
-            </span>
-                        </div>
-                        <div className="form-group bmd-form-group">
-                            <div className="dropdown">
-                                <button
-                                    className="dropdown-toggle btn btn-primary btn-round btn-block"
-                                    type="button" id="dropdownMenuButton"
-                                    data-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false">
-                                    {/*machineStatus*/}
-                                    {props.content.typeOfCloth.Name}
-                                    <div className="ripple-container"/>
-                                </button>
-                                <div className="dropdown-menu"
-                                     aria-labelledby="dropdownMenuButton"
-                                     x-placement="bottom-start"
-                                     style={{
-                                         position: 'absolute',
-                                         top: '41px',
-                                         left: '1px',
-                                         willChange: 'top, left'
-                                     }}>
-                                    <a className="dropdown-item"
-                                       onClick={() => {
-                                           this.toggleObjSelect("Name", "T-shirt", "typeOfCloth")
-                                       }}
-                                       href="#">T-shirt</a>
-                                    <a className="dropdown-item"
-                                       onClick={() => {
-                                           this.toggleObjSelect("Name", "Y-shirt", "typeOfCloth")
-                                       }}
-                                       href="#">Y-shirt</a>
-                                    <a className="dropdown-item"
-                                       onClick={() => {
-                                           this.toggleObjSelect("Name", "X-shirt", "typeOfCloth")
-                                       }}
-                                       href="#">X-shirt</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        )
-    };
 
 }
 ;
@@ -568,10 +398,10 @@ const ModelItemTemplate = (props) => {
                 {props.codeOfModel}
             </td>
             <td>
-                {props.typeOfCloth.Name}
+                {props.typeOfCloth.name}
             </td>
             <td>
-                <p>{props.customer.name}</p>
+                <p>{props.customer.customerName}</p>
             </td>
             <td>
                 <p>{props.actionOnModel && props.actionOnModel.length}</p>

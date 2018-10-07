@@ -2067,7 +2067,7 @@
             fontWeight: !0,
             lineHeight: !0,
             opacity: !0,
-            order: !0,
+            Order: !0,
             orphans: !0,
             widows: !0,
             zIndex: !0,

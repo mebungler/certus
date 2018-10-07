@@ -2,15 +2,17 @@ import React from "react";
 import Sidebar from "../header/Sidebar";
 import List from "../list/List";
 import Modal from "../modal/Modal";
+import api from "../../api/api";
+import uuid from "uuid";
 
 class CustomerPage extends React.Component {
 
     //var
     state = {
         customer: {
-            name: "",
-            contact: "",
-            email: "",
+            customerName: "Kamuran-",
+            contactNumber: "nomerim yuq",
+            email: "kamuran@nmadir.com",
             logo: "../../assets/img/customer.svg"
         },
         customers: [],
@@ -20,9 +22,10 @@ class CustomerPage extends React.Component {
     };
 
     defaultCustomerState = {
-        name: "Kamuran-",
-        contact: "nomerim yuq",
-        email: "kamuran@nmadir.com",
+        id: uuid(),
+        customerName: "",
+        contactNumber: "",
+        email: "",
         logo: "../../assets/img/customer.svg"
     };
 
@@ -43,7 +46,8 @@ class CustomerPage extends React.Component {
     edit = () => {
 
     };
-    closeCustomer = () => {
+
+    closeModal = () => {
         this.setState((prevState) => {
             return {
                 ...prevState,
@@ -56,9 +60,61 @@ class CustomerPage extends React.Component {
         });
         console.log(this.state);
     };
+    populateCustomers = () => {
+        api.customer.getAll().then(res => {
+            console.log(res);
+            this.setState((prevState => {
+                return {
+                    ...prevState,
+                    customers: res.data.customers
+                }
+            }));
+            console.log(res);
+        })
+    };
+
+    componentDidMount() {
+        this.populateCustomers();
+    };
+
+    closeCustomer = () => {
+        this.setState((prevState) => {
+            return {
+                ...prevState,
+                modal: {
+                    ...prevState.modal,
+                    visibility: 'none'
+                },
+                customer: this.defaultCustomerState
+            }
+        });
+        // console.log(this.state);
+    };
+
+    textInputChange = (e) => {
+        this.setState({
+            ...this.state,
+            model: {
+                ...this.state.model,
+                [e.target.name]: e.target.value
+            },
+        })
+    };
 
     addRequest = () => {
-
+        api.customer.add(this.state.customer).then(res => {
+            console.log(res);
+            if (res.data.errors && res.data.errors !== {}) {
+                this.setState({
+                    ...this.state,
+                    errors: {
+                        global: res.data.errors.global
+                    }
+                });
+            }
+            this.closeModal();
+            this.populateCustomers();
+        });
     };
 
     textInputChange = (e) => {
@@ -71,7 +127,7 @@ class CustomerPage extends React.Component {
         })
     };
 
-    fileInputChange=(e)=>{
+    fileInputChange = (e) => {
         if (e.target.files[0]) {
             let fr = new FileReader();
             fr.onload = () => {
@@ -85,7 +141,7 @@ class CustomerPage extends React.Component {
             };
             fr.readAsDataURL(e.target.files[0]);
         }
-    }
+    };
 
     render() {
         return (
@@ -122,8 +178,31 @@ class CustomerPage extends React.Component {
     }
 
 //Component
-    CustomerItemTemplate = () => {
-
+    CustomerItemTemplate = (props) => {
+        return (
+            <tr>
+                <td>
+                    <img
+                        className="img"
+                        src={props.logo}
+                        style={{
+                            width: "100px",
+                            height: "100px",
+                            borderRadius: "50px"
+                        }}
+                    />
+                </td>
+                <td>
+                    {props.customerName}
+                </td>
+                <td>
+                    <p>{props.contactNumber}</p>
+                </td>
+                <td>
+                    <p>{props.email}</p>
+                </td>
+            </tr>
+        )
     };
 
     tableHeader = () => (
@@ -150,12 +229,12 @@ class CustomerPage extends React.Component {
                             <div className="picture-container">
                                 <div className="picture">
                                     <img src={this.state.customer.logo}
-                                    className="picture-src" id="wizardPicturePreview"
-                                    title=""/>
+                                         className="picture-src" id="wizardPicturePreview"
+                                         title=""/>
                                     <input id="wizard-picture"
                                            type="file"
                                            name="photo"
-                                        onChange={this.fileInputChange}
+                                           onChange={this.fileInputChange}
                                     />
                                 </div>
                                 <h6 className="description">Choose Picture</h6>
@@ -170,31 +249,31 @@ class CustomerPage extends React.Component {
                                 </div>
                                 <div className="form-group bmd-form-group">
                                     <input className="form-control" id="exampleInput1"
-                                           name="firstName"
-                                           placeholder="First Name"
+                                           name="customerName"
+                                           placeholder="Customer Name"
                                            required=""
                                            aria-required="true"
                                            type="text"
-                                        value={props.content.name}
-                                        onChange={this.textInputChange}
+                                           value={props.content.customerName}
+                                           onChange={this.textInputChange}
                                     />
                                 </div>
                             </div>
                             <div className="input-group form-control-lg">
                                 <div className="input-group-prepend">
                                                             <span className="input-group-text">
-                                                              <i className="material-icons">phone</i>
+                                                             <i class="fab fa-telegram"></i>
                                                             </span>
                                 </div>
                                 <div className="form-group bmd-form-group">
                                     <input className="form-control" id="exampleInput11"
-                                           name="lastName"
-                                           placeholder="Last name"
+                                           name="contactNumber"
+                                           placeholder="Telegram Contact"
                                            required=""
                                            aria-required="true"
                                            type="text"
-                                        value={props.content.contact}
-                                        onChange={this.textInputChange}
+                                           value={props.content.contactNumber}
+                                           onChange={this.textInputChange}
                                     />
                                 </div>
                             </div>
@@ -206,8 +285,8 @@ class CustomerPage extends React.Component {
                                 </div>
                                 <div className="form-group bmd-form-group">
                                     <input className="form-control" id="exampleInput11"
-                                           name="lastName"
-                                           placeholder="Last name"
+                                           name="email"
+                                           placeholder="Email Address"
                                            required=""
                                            aria-required="true"
                                            type="text"
