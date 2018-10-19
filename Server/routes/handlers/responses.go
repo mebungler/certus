@@ -14,10 +14,10 @@ type Response struct {
 	Equipments  []models.Equipment   `json:"equipments,omitempty"`
 	Customers   []models.Customer    `json:"customers,omitempty"`
 	Models      []models.Model       `json:"models,omitempty"`
-	TypeOfCloth []models.TypeOfCloth `json:"typeofclothe,omitempty"`
-	Order 		[]models.Order 		 `josn:"order,omitempty"`
-	Passport 	[]models.Passport 	 `josn:"passport,omitempty"`
-	FinishedOperation 	[]models.FinishedOperation 	 `josn:"finishedOperation,omitempty"`
+	TypeOfCloth []models.TypeOfCloth `json:"typeofclothes,omitempty"`
+	Order 		[]models.Order 		 `josn:"orders,omitempty"`
+	Passport 	[]models.Passport 	 `josn:"passports,omitempty"`
+	FinishedOperation 	[]models.FinishedOperation 	 `josn:"finishedOperations,omitempty"`
 	Pause 			[]models.Pause		`json:"pauses,omitempty"`
 	Technology 		[]models.Technology		`json:"technologies,omitempty"`
 
