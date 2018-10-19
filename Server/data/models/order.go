@@ -10,6 +10,7 @@ type Order struct {
 	Model Model 		 	`json:"model,omitempty"`
 	ModelID string
 	Property 	  []Property `json:"property,omitempty"`
+	TechnologyID  	string 		`json:"technology_id"`
 
 
 }

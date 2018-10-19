@@ -26,6 +26,7 @@ func AddCustomer(w http.ResponseWriter,r *http.Request)  {
 }
 
 func GetCustomers(w http.ResponseWriter,r *http.Request)  {
+
 	customers,err:= database.GetCustomers()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
