@@ -221,6 +221,33 @@ var routes = Routes{
 		Pattern:     "/api/pre/passport/{component}",
 		HandlerFunc: handlers.GetOnePrePassport,
 	},
+	Route{
+		Name:        "Pause",
+		Method:      "POST",
+		Pattern:     "/api/pause",
+		HandlerFunc: handlers.AddPause,
+	},
+
+	Route{
+		Name:        "Technology",
+		Method:      "POST",
+		Pattern:     "/api/technology",
+		HandlerFunc: handlers.AddTechnology,
+	},
+
+	Route{
+		Name:        "Technology",
+		Method:      "Get",
+		Pattern:     "/api/technology/{id}",
+		HandlerFunc: handlers.GetTechnology,
+	},
+
+	Route{
+		Name:        "Technologies",
+		Method:      "Get",
+		Pattern:     "/api/technology",
+		HandlerFunc: handlers.GetAllTechnologies,
+	},
 }
 
 func NewRouter() http.Handler {

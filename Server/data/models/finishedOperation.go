@@ -13,4 +13,5 @@ type FinishedOperation struct {
 	CreatedAt time.Time `json:"createdAt,omitempty"`
 	UpdatedAt time.Time `json:"updatedAt,omitempty"`
 	Time      int       `json:"time,omitempty"`
+	Pause     []Pause   `json:"pause,omitempty"`
 }

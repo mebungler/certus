@@ -18,5 +18,8 @@ type Response struct {
 	Order 		[]models.Order 		 `josn:"order,omitempty"`
 	Passport 	[]models.Passport 	 `josn:"passport,omitempty"`
 	FinishedOperation 	[]models.FinishedOperation 	 `josn:"finishedOperation,omitempty"`
+	Pause 			[]models.Pause		`json:"pauses,omitempty"`
+	Technology 		[]models.Technology		`json:"technologies,omitempty"`
+
 
 }
