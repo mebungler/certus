@@ -12,6 +12,7 @@ type Order struct {
 	Property 	  []Property `json:"property,omitempty"`
 	TechnologyID  	string 		`json:"technology_id"`
 	TypeOfProcess 		string `json:"type_of_process"`
+	Photo				string `json:"photo,omitempty"`
 
 
 }
