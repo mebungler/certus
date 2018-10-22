@@ -73,3 +73,35 @@ func GetAllPre(w http.ResponseWriter, r *http.Request)  {
 		logger.LogErr(err)
 	}
 }
+
+
+func UpdateModel(w http.ResponseWriter, r *http.Request) {
+	var model models.Model
+	decoder.Get(r.Body, &model)
+	err := database.Update(model)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		if err := json.NewEncoder(w).Encode(Response{Errors: Errors{Global: "Failed to update model:\n" + err.Error()}}); err != nil {
+			logger.LogErr(err)
+		}
+		return
+	}
+	w.WriteHeader(http.StatusOK)
+}
+
+func RemoveModel(w http.ResponseWriter, r *http.Request)  {
+	params := mux.Vars(r)
+	model := models.Model{ID:params["id"]}
+	err:=database.Remove(model)
+	if err== nil {
+		w.WriteHeader(http.StatusOK)
+		if err:=json.NewEncoder(w).Encode(Response{Models: model}); err!=nil{
+			logger.LogErr(err)
+		}
+	} else {
+		w.WriteHeader(http.StatusBadRequest)
+		if err:=json.NewEncoder(w).Encode(Response{Errors:Errors{Global:"Invalid credentials"}}); err!=nil{
+			logger.LogErr(err)
+		}
+	}
+}

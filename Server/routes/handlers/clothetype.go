@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"encoding/json"
+	"github.com/gorilla/mux"
 	"net/http"
 	"../../data/models"
 	"../../decoder"
@@ -57,4 +58,36 @@ func GetAllTypes(w http.ResponseWriter, r *http.Request) {
 		logger.LogErr(err)
 	}
 
+}
+
+
+func UpdateClotheType(w http.ResponseWriter, r *http.Request) {
+	var clotheType models.TypeOfCloth
+	decoder.Get(r.Body, &clotheType)
+	err := database.Update(clotheType)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		if err := json.NewEncoder(w).Encode(Response{Errors: Errors{Global: "Failed to update clotheType:\n" + err.Error()}}); err != nil {
+			logger.LogErr(err)
+		}
+		return
+	}
+	w.WriteHeader(http.StatusOK)
+}
+
+func RemoveClotheType(w http.ResponseWriter, r *http.Request)  {
+	params := mux.Vars(r)
+	clotheType := models.TypeOfCloth{ID:params["id"]}
+	err:=database.Remove(clotheType)
+	if err== nil {
+		w.WriteHeader(http.StatusOK)
+		if err:=json.NewEncoder(w).Encode(Response{TypeOfCloth: clotheType}); err!=nil{
+			logger.LogErr(err)
+		}
+	} else {
+		w.WriteHeader(http.StatusBadRequest)
+		if err:=json.NewEncoder(w).Encode(Response{Errors:Errors{Global:"Invalid credentials"}}); err!=nil{
+			logger.LogErr(err)
+		}
+	}
 }

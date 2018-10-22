@@ -76,3 +76,36 @@ func GetAllPreOrder(w http.ResponseWriter, r *http.Request)  {
 		logger.LogErr(err)
 	}
 }
+
+
+
+func UpdateOrder(w http.ResponseWriter, r *http.Request) {
+	var order models.Order
+	decoder.Get(r.Body, &order)
+	err := database.Update(order)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		if err := json.NewEncoder(w).Encode(Response{Errors: Errors{Global: "Failed to update order:\n" + err.Error()}}); err != nil {
+			logger.LogErr(err)
+		}
+		return
+	}
+	w.WriteHeader(http.StatusOK)
+}
+
+func RemoveOrder(w http.ResponseWriter, r *http.Request)  {
+	params := mux.Vars(r)
+	order := models.Order{ID:params["id"]}
+	err:=database.Remove(order)
+	if err== nil {
+		w.WriteHeader(http.StatusOK)
+		if err:=json.NewEncoder(w).Encode(Response{Order: order}); err!=nil{
+			logger.LogErr(err)
+		}
+	} else {
+		w.WriteHeader(http.StatusBadRequest)
+		if err:=json.NewEncoder(w).Encode(Response{Errors:Errors{Global:"Invalid credentials"}}); err!=nil{
+			logger.LogErr(err)
+		}
+	}
+}
