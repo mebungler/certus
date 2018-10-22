@@ -20,6 +20,7 @@ type Response struct {
 	FinishedOperation 	[]models.FinishedOperation 	 `josn:"finishedOperations,omitempty"`
 	Pause 			[]models.Pause		`json:"pauses,omitempty"`
 	Technology 		[]models.Technology		`json:"technologies,omitempty"`
+	ActionOnModel   []models.ActionOnModel `json:"action_on_models,omitempty"`
 
 
 }

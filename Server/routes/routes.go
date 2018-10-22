@@ -222,33 +222,217 @@ var routes = Routes{
 		HandlerFunc: handlers.GetOnePrePassport,
 	},
 	Route{
-		Name:        "Pause",
+		Name:        "AddPause",
 		Method:      "POST",
 		Pattern:     "/api/pause",
 		HandlerFunc: handlers.AddPause,
 	},
 
 	Route{
-		Name:        "Technology",
+		Name:        "AddTechnology",
 		Method:      "POST",
 		Pattern:     "/api/technology",
 		HandlerFunc: handlers.AddTechnology,
 	},
 
 	Route{
-		Name:        "Technology",
+		Name:        "GetTechnology",
 		Method:      "Get",
 		Pattern:     "/api/technology/{id}",
 		HandlerFunc: handlers.GetTechnology,
 	},
 
 	Route{
-		Name:        "Technologies",
+		Name:        "GetAllTechnologies",
 		Method:      "Get",
 		Pattern:     "/api/technology",
 		HandlerFunc: handlers.GetAllTechnologies,
 	},
+
+	Route{
+		Name:        "UpdateUser",
+		Method:      "PUT",
+		Pattern:     "/api/user",
+		HandlerFunc: handlers.UpdateUser,
+	},
+
+	Route{
+		Name:        "RemoveUser",
+		Method:      "DELETE",
+		Pattern:     "/api/user/{id}",
+		HandlerFunc: handlers.RemoveUser,
+	},
+
+	Route{
+		Name:        "UpdateTechnology",
+		Method:      "PUT",
+		Pattern:     "/api/technology",
+		HandlerFunc: handlers.UpdateTechnology,
+	},
+
+	Route{
+		Name:        "RemoveTechnology",
+		Method:      "DELETE",
+		Pattern:     "/api/technology/{id}",
+		HandlerFunc: handlers.RemoveTechnology,
+	},
+
+
+	Route{
+		Name:        "UpdateProperty",
+		Method:      "PUT",
+		Pattern:     "/api/property",
+		HandlerFunc: handlers.UpdateProperty,
+	},
+
+	Route{
+		Name:        "RemoveProperty",
+		Method:      "DELETE",
+		Pattern:     "/api/property/{id}",
+		HandlerFunc: handlers.RemoveProperty,
+	},
+
+	Route{
+		Name:        "UpdateProduct",
+		Method:      "PUT",
+		Pattern:     "/api/product",
+		HandlerFunc: handlers.UpdateProduct,
+	},
+
+	Route{
+		Name:        "RemoveProduct",
+		Method:      "DELETE",
+		Pattern:     "/api/product/{id}",
+		HandlerFunc: handlers.RemoveProduct,
+	},
+
+	Route{
+		Name:        "UpdatePassport",
+		Method:      "PUT",
+		Pattern:     "/api/passport",
+		HandlerFunc: handlers.UpdatePassport,
+	},
+
+	Route{
+		Name:        "RemovePassport",
+		Method:      "DELETE",
+		Pattern:     "/api/passport/{id}",
+		HandlerFunc: handlers.RemovePassport,
+	},
+
+	Route{
+		Name:        "UpdateOrder",
+		Method:      "PUT",
+		Pattern:     "/api/order",
+		HandlerFunc: handlers.UpdateOrder,
+	},
+
+	Route{
+		Name:        "RemoveOrder",
+		Method:      "DELETE",
+		Pattern:     "/api/order/{id}",
+		HandlerFunc: handlers.RemoveOrder,
+	},
+
+	Route{
+		Name:        "UpdateOperation",
+		Method:      "PUT",
+		Pattern:     "/api/opertion",
+		HandlerFunc: handlers.UpdateOperation,
+	},
+
+	Route{
+		Name:        "RemoveOperation",
+		Method:      "DELETE",
+		Pattern:     "/api/opertion/{id}",
+		HandlerFunc: handlers.RemoveOperation,
+	},
+
+	Route{
+		Name:        "UpdateModel",
+		Method:      "PUT",
+		Pattern:     "/api/model",
+		HandlerFunc: handlers.UpdateModel,
+	},
+
+	Route{
+		Name:        "RemoveModel",
+		Method:      "DELETE",
+		Pattern:     "/api/model/{id}",
+		HandlerFunc: handlers.RemoveModel,
+	},
+
+	Route{
+		Name:        "UpdateFinishedOperation",
+		Method:      "PUT",
+		Pattern:     "/api/finishedOperation",
+		HandlerFunc: handlers.UpdateFinishedOperation,
+	},
+
+	Route{
+		Name:        "RemoveFinishedOperation",
+		Method:      "DELETE",
+		Pattern:     "/api/finishedOperation/{id}",
+		HandlerFunc: handlers.RemoveFinshedOperation,
+	},
+
+	Route{
+		Name:        "UpdateEquipment",
+		Method:      "PUT",
+		Pattern:     "/api/equipment",
+		HandlerFunc: handlers.UpdateEquipment,
+	},
+
+	Route{
+		Name:        "RemoveEquipment",
+		Method:      "DELETE",
+		Pattern:     "/api/equipment/{id}",
+		HandlerFunc: handlers.RemoveEquipment,
+	},
+
+	Route{
+		Name:        "UpdateCustomer",
+		Method:      "PUT",
+		Pattern:     "/api/customer",
+		HandlerFunc: handlers.UpdateCustomer,
+	},
+
+	Route{
+		Name:        "RemoveCustomer",
+		Method:      "DELETE",
+		Pattern:     "/api/customer/{id}",
+		HandlerFunc: handlers.RemoveCustomer,
+	},
+
+	Route{
+		Name:        "UpdateTypeClothe",
+		Method:      "PUT",
+		Pattern:     "/api/type",
+		HandlerFunc: handlers.UpdateClotheType,
+	},
+
+	Route{
+		Name:        "RemoveCustomer",
+		Method:      "DELETE",
+		Pattern:     "/api/type/{id}",
+		HandlerFunc: handlers.RemoveClotheType,
+	},
+
+	Route{
+		Name:        "UpdateTypeClothe",
+		Method:      "PUT",
+		Pattern:     "/api/type",
+		HandlerFunc: handlers.UpdateClotheType,
+	},
+
+	Route{
+		Name:        "RemoveCustomer",
+		Method:      "DELETE",
+		Pattern:     "/api/type/{id}",
+		HandlerFunc: handlers.RemoveClotheType,
+	},
 }
+
 
 func NewRouter() http.Handler {
 	router := mux.NewRouter().StrictSlash(true)

@@ -73,3 +73,35 @@ func GetAllPreFinishedOperations(w http.ResponseWriter, r *http.Request)  {
 		logger.LogErr(err)
 	}
 }
+
+
+func UpdateFinishedOperation(w http.ResponseWriter, r *http.Request) {
+	var finishedOperation models.FinishedOperation
+	decoder.Get(r.Body, &finishedOperation)
+	err := database.Update(finishedOperation)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		if err := json.NewEncoder(w).Encode(Response{Errors: Errors{Global: "Failed to update finishedOperation:\n" + err.Error()}}); err != nil {
+			logger.LogErr(err)
+		}
+		return
+	}
+	w.WriteHeader(http.StatusOK)
+}
+
+func RemoveFinshedOperation(w http.ResponseWriter, r *http.Request)  {
+	params := mux.Vars(r)
+	finishedOperation := models.FinishedOperation{ID:params["id"]}
+	err:=database.Remove(finishedOperation)
+	if err== nil {
+		w.WriteHeader(http.StatusOK)
+		if err:=json.NewEncoder(w).Encode(Response{FinishedOperation: finishedOperation}); err!=nil{
+			logger.LogErr(err)
+		}
+	} else {
+		w.WriteHeader(http.StatusBadRequest)
+		if err:=json.NewEncoder(w).Encode(Response{Errors:Errors{Global:"Invalid credentials"}}); err!=nil{
+			logger.LogErr(err)
+		}
+	}
+}

@@ -51,3 +51,12 @@ func GetAllWithEagerLoading(object interface{},str string) error  {
 	}
 	return nil
 }
+
+func Update(object interface{}) error {
+	DB.Save(object)
+	if DB.Error!=nil{
+		logger.LogErr(DB.Error)
+		return DB.Error
+	}
+	return nil
+}

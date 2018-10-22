@@ -86,3 +86,34 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 }
+
+func UpdateUser(w http.ResponseWriter, r *http.Request) {
+	var user models.User
+	decoder.Get(r.Body, &user)
+	err := database.Update(user)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		if err := json.NewEncoder(w).Encode(Response{Errors: Errors{Global: "Failed to update user:\n" + err.Error()}}); err != nil {
+			logger.LogErr(err)
+		}
+		return
+	}
+	w.WriteHeader(http.StatusOK)
+}
+
+func RemoveUser(w http.ResponseWriter, r *http.Request)  {
+	params := mux.Vars(r)
+	user := models.User{ID:params["id"]}
+	err:=database.Remove(user)
+	if err== nil {
+		w.WriteHeader(http.StatusOK)
+		if err:=json.NewEncoder(w).Encode(Response{User: user}); err!=nil{
+			logger.LogErr(err)
+		}
+	} else {
+		w.WriteHeader(http.StatusBadRequest)
+		if err:=json.NewEncoder(w).Encode(Response{Errors:Errors{Global:"Invalid credentials"}}); err!=nil{
+			logger.LogErr(err)
+		}
+	}
+}
