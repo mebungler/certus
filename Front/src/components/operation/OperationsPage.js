@@ -26,13 +26,14 @@ class OperationsPages extends React.Component {
         modal: {
             visibility: "none"
         },
-        operations: []
+        operations: [],
+        title:"Операции"
     };
     defaultOperationState = {
         id: uuid(),
         numOfOperation: 1,
         equipment: {
-            machineType: "Select machine"
+            machineType: "Выбрать машину"
         },
         typeOfCloth: "",
         name: "",
@@ -101,8 +102,14 @@ class OperationsPages extends React.Component {
         this.populateOperations();
     }
 
-    edit = () => {
-
+    edit = operation => {
+        this.setState({
+            modal: {
+                visibility: "block",
+                header: "Изменить заказчика"
+            },
+            operation: operation
+        });
     };
 
     toggleEquipmentSelect = (index) => {
@@ -138,8 +145,6 @@ class OperationsPages extends React.Component {
     };
 
     addRequest = () => {
-        console.log("operaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-        console.log(this.state.operation);
         api.operation.addOperation(this.state.operation).then(res => {
             console.log(res);
             if (res.data.errors && res.data.errors !== {}) {
@@ -178,6 +183,7 @@ class OperationsPages extends React.Component {
                         <div className="container-fluid">
                             <div className="row">
                                 <List
+                                    title={this.state.title}
                                     add={this.add}
                                     edit={this.edit}
                                     items={this.state.operations}
@@ -188,7 +194,7 @@ class OperationsPages extends React.Component {
                                     this.state.modal.visibility === 'block' &&
                                     <Modal
                                         item={this.state.operation}
-                                        tabs={['Operation']}
+                                        tabs={['Операция']}
                                         visibility={this.state.modal.visibility}
                                         items={[this.operationTemplate]}
                                         closeModal={this.closeModal}
@@ -208,7 +214,9 @@ class OperationsPages extends React.Component {
         return (
             <tr>
                 <td>
+                    <a href="#" onClick={() => props.edit(props)}>
                     {props.name}
+                    </a>
                 </td>
                 <td>
                     {props.numOfOperation}
@@ -231,11 +239,11 @@ class OperationsPages extends React.Component {
         return (
             <div className="row justify-content-center">
                 <div className="col-sm-12">
-                    <h5 className="info-text"> Enter the info about operation </h5>
+                    <h5 className="info-text"> Введите информацию об операции</h5>
                 </div>
                 <div className="col-md-6">
                     <div className="text-center">
-                        <h4 className="text-center">Auto generated QR code</h4>
+                        <h4 className="text-center">Автогенерированный QR-код</h4>
                         <div className="text-center">
                             <QRCode className="text-center" value={props.id}/>
                         </div>
@@ -273,7 +281,7 @@ class OperationsPages extends React.Component {
                                 className="form-control"
                                 id="exampleInput11"
                                 name="numOfOperation"
-                                placeholder="Number of Operation"
+                                placeholder="Количество операций"
                                 required=""
                                 aria-required="true"
                                 type="text"
@@ -333,7 +341,7 @@ class OperationsPages extends React.Component {
                                 className="form-control"
                                 id="exampleInput11"
                                 name="typeOfCloth"
-                                placeholder="Type of Cloth"
+                                placeholder="Тип издели"
                                 required=""
                                 aria-required="true"
                                 type="text"
@@ -355,7 +363,7 @@ class OperationsPages extends React.Component {
                                 className="form-control"
                                 id="exampleInput11"
                                 name="name"
-                                placeholder="Name of Operation"
+                                placeholder="Название операции"
                                 required=""
                                 aria-required="true"
                                 type="text"
@@ -377,7 +385,7 @@ class OperationsPages extends React.Component {
                                 className="form-control"
                                 id="exampleInput11"
                                 name="idealTime"
-                                placeholder="Ideal Time"
+                                placeholder="хронометраж"
                                 required=""
                                 aria-required="true"
                                 type="text"
@@ -396,12 +404,12 @@ class OperationsPages extends React.Component {
         return (
             <thead>
             <tr>
-                <th>name</th>
-                <th>Number of operation</th>
-                <th>type of machine</th>
-                <th>type of cloth</th>
-                <th>ideal time</th>
-                <th className="text-right">Actions</th>
+                <th>Название</th>
+                <th>Количество операций</th>
+                <th>Тип машины</th>
+                <th>Тип изделий</th>
+                <th>Хронометраж</th>
+                <th className="text-right">Действия</th>
             </tr>
             </thead>
         );

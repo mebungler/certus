@@ -11,11 +11,13 @@ class OrderPage extends React.Component {
 
     //var
     state = {
+        title: "Заказы",
         modal: {
             visibility: "none"
         },
-        Orders: [],
-        Order: {
+        orders: [],
+        order: {
+            photo: "",
             customer: {},
             model: {},
             typeOfCloth: {
@@ -27,23 +29,30 @@ class OrderPage extends React.Component {
         models: [],
     };
 
+    ModelID = uuid();
+
     defaultOrderState = {
+        photo:"../../assets/img/cs-ohnoes.svg",
         id: uuid(),
         customer: {
-            customerName: "Choose the customer"
+            customerName: "Выберите Клиента"
         },
+        CodeOfModel: "",
+        TypeOfClothID: "",
         property: [{
             quantity: "",
-            size: ""
+            size: "",
+            color: ""
         }],
         model: {
             codeOfModel: "",
+            id: this.ModelID
         },
         typeOfCloth: {
-            name: "Choose the type of cloth"
+            name: "Выберите тип Изделий"
         },
-        CustomerID:'',
-        ModelID:''
+        CustomerID: '',
+        ModelID: this.ModelID
     };
 
 //functions
@@ -52,10 +61,10 @@ class OrderPage extends React.Component {
         this.setState((prevState) => {
             return {
                 ...prevState,
-                Order: {
-                    ...prevState.Order,
+                order: {
+                    ...prevState.order,
                     customer: prevState.customers[index],
-                    CustomerID:prevState.customers[index].id
+                    CustomerID: prevState.customers[index].id
                 }
             }
         });
@@ -65,8 +74,8 @@ class OrderPage extends React.Component {
     textInputChange = (obj, value) => {
         this.setState({
             ...this.state,
-            Order: {
-                ...this.state.Order,
+            order: {
+                ...this.state.order,
                 [obj]: {
                     [value.target.name]: value.target.value
                 }
@@ -75,13 +84,13 @@ class OrderPage extends React.Component {
     };
 
     inputArrayChange = (value, variable, index) => {
-        let list = this.state.Order.property;
+        let list = this.state.order.property;
         list[index][variable] = value.target.value;
         this.setState((prevState) => {
             return {
                 ...prevState,
-                Order: {
-                    ...prevState.Order,
+                order: {
+                    ...prevState.order,
                     property: list
                 }
             }
@@ -118,11 +127,12 @@ class OrderPage extends React.Component {
     };
 
     populateOrders = () => {
-        api.order.preGetAll().then(res => {
+        api.order.getAll().then(res => {
+            console.log(res);
             this.setState((prevState => {
                 return {
                     ...prevState,
-                    Orders: res.data.Orders
+                    orders: res.data.Order
                 }
             }))
         })
@@ -134,9 +144,9 @@ class OrderPage extends React.Component {
             fr.onload = () => {
                 this.setState({
                     ...this.state,
-                    Order: {
-                        ...this.state.Order,
-                        logo: fr.result
+                    order: {
+                        ...this.state.order,
+                        photo: fr.result
                     }
                 });
             };
@@ -148,9 +158,9 @@ class OrderPage extends React.Component {
         this.setState((prevState => {
                 return {
                     ...prevState,
-                    Order: {
-                        ...prevState.Order,
-                        property: [...prevState.Order.property.filter((bool, i) => {
+                    order: {
+                        ...prevState.order,
+                        property: [...prevState.order.property.filter((bool, i) => {
                             return i !== index;
                         })]
                     }
@@ -161,9 +171,14 @@ class OrderPage extends React.Component {
     };
 
     addRequest = () => {
-        let {id,CustomerID}=this.state.Order;
-        api.order.add({id:id,customerId:CustomerID}).then(res => {
-
+        let {order} = this.state;
+        api.order.add({
+            id: order.id,
+            CodeOfModel: order.codeOfModel,
+            CustomerID: order.CustomerID,
+            ModelID: order.ModelID
+        }).then(res => {
+            api.model.add(order.model);
             if (res.data.errors && res.data.errors !== {}) {
                 this.setState({
                     ...this.state,
@@ -182,11 +197,11 @@ class OrderPage extends React.Component {
         this.setState((prevState) => {
             return {
                 ...prevState,
-                Order: {
-                    ...prevState.Order,
-                    property: [...prevState.Order.property,
+                order: {
+                    ...prevState.order,
+                    property: [...prevState.order.property,
                         {
-                            ...prevState.Order.property
+                            ...prevState.order.property
                         }]
                 }
             };
@@ -214,7 +229,7 @@ class OrderPage extends React.Component {
                     ...prevState.modal,
                     visibility: 'block'
                 },
-                Order: this.defaultOrderState
+                order: this.defaultOrderState
             }
         });
     };
@@ -222,8 +237,8 @@ class OrderPage extends React.Component {
     toggleObjSelect = (name, value, object) => {
         this.setState({
             ...this.state,
-            Order: {
-                ...this.state.Order,
+            order: {
+                ...this.state.order,
                 [object]: {
                     [name]: value
                 }
@@ -232,12 +247,11 @@ class OrderPage extends React.Component {
     };
 
 
-
     toggleObjSelect = (name, value, object) => {
         this.setState({
             ...this.state,
-            Order: {
-                ...this.state.Order,
+            order: {
+                ...this.state.order,
                 [object]: {
                     [name]: value
                 }
@@ -249,8 +263,8 @@ class OrderPage extends React.Component {
         this.setState((prevState) => {
             return {
                 ...prevState,
-                Order: {
-                    ...prevState.Order,
+                order: {
+                    ...prevState.order,
                     model: prevState.models[index]
                 }
             }
@@ -281,17 +295,18 @@ class OrderPage extends React.Component {
                         <div className="container-fluid">
                             <div className="row">
                                 <List
+                                    title={this.state.title}
                                     add={this.add}
                                     edit={this.edit}
-                                    items={this.state.Orders}
+                                    items={this.state.orders}
                                     itemTemplate={this.OrderItemTemplate}
                                     header={this.tableHeader}
                                 />
                                 {
                                     this.state.modal.visibility === 'block' &&
                                     <Modal
-                                        item={this.state.Order}
-                                        tabs={['Order', 'Table']}
+                                        item={this.state.order}
+                                        tabs={['Заказ', 'Таблица']}
                                         visibility={this.state.modal.visibility}
                                         items={[this.orderTemplate, this.tableTemplate]}
                                         closeModal={this.closeModal}
@@ -309,19 +324,41 @@ class OrderPage extends React.Component {
     //components
 
     OrderItemTemplate = (props) => {
+        let customer = this.state.customers.find((item, index) => {
+            return item.id === props.CustomerID
+        });
+
+        let customerName = customer ? customer.customerName : "null";
+
+        let model = this.state.models.find((item, index) => {
+            return item.id === props.ModelID
+        });
+
+        let codeOfModel = model ? model.codeOfModel : "null";
+        console.log("photo qani");
+        console.log(props);
         return (
             <tr>
-                <td>
 
+                <td>
+                    <img
+                        className="img"
+                        src={props.photo}
+                        style={{
+                            width: "100px",
+                            height: "100px",
+                            borderRadius: "50px"
+                        }}
+                    />
                 </td>
                 <td>
-                    {props.customerName}
+                    {customerName}
                 </td>
                 <td>
-                    <p>{props.codeOfModel}</p>
+                    {codeOfModel}
                 </td>
                 <td>
-                    <p>{props.typeOfCloth}</p>
+                    {}
                 </td>
             </tr>
         )
@@ -331,10 +368,11 @@ class OrderPage extends React.Component {
         return (
             <thead>
             <tr>
-                <th>Customer</th>
-                <th>Model</th>
-                <th>Type of model</th>
-                <th className="text-right">Actions</th>
+                <th>Фото</th>
+                <th>Заказчик</th>
+                <th>Модель</th>
+                <th>Тип издели</th>
+                <th className="text-right">Действия</th>
             </tr>
             </thead>
         );
@@ -348,14 +386,14 @@ class OrderPage extends React.Component {
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Quantity</th>
-                                <th>Size</th>
-                                <th>Color</th>
-                                <th>Actions</th>
+                                <th>Количество</th>
+                                <th>Размер</th>
+                                <th>Цвет</th>
+                                <th>Действие</th>
                             </tr>
                             </thead>
                             <tbody>
-                            {this.state.Order.property && this.state.Order.property.map((item, index) => (
+                            {this.state.order.property && this.state.order.property.map((item, index) => (
                                 <tr key={index}>
                                     <td>
                                         <p>{index}</p>
@@ -368,7 +406,7 @@ class OrderPage extends React.Component {
                                                     className="form-control"
                                                     id="exampleInput11"
                                                     name="quantity"
-                                                    placeholder="Number of Model"
+                                                    placeholder="Количество"
                                                     required=""
                                                     aria-required="true"
                                                     type="text"
@@ -388,7 +426,7 @@ class OrderPage extends React.Component {
                                                     className="form-control"
                                                     id="exampleInput11"
                                                     name="size"
-                                                    placeholder="Number of Model"
+                                                    placeholder="Размер"
                                                     required=""
                                                     aria-required="true"
                                                     type="text"
@@ -409,7 +447,7 @@ class OrderPage extends React.Component {
                                                     className="form-control"
                                                     id="exampleInput11"
                                                     name="size"
-                                                    placeholder="Number of Model"
+                                                    placeholder="Цвет"
                                                     required=""
                                                     aria-required="true"
                                                     type="text"
@@ -449,11 +487,11 @@ class OrderPage extends React.Component {
         return (
             <div className="row justify-content-center">
                 <div className="col-sm-12">
-                    <h5 className="info-text"> Enter info about Model </h5>
+                    <h5 className="info-text"> Введите информацию о модели </h5>
                 </div>
-                <div className="col-md-6">
+                <div className="col-md-7">
                     <div className="text-center">
-                        <h4 className="text-center">Auto generated QR code</h4>
+                        <h4 className="text-center">Автогенерированный QR-код</h4>
                         <div className="text-center">
                             <QRCode className="text-center" value={props.content.id}/>
                         </div>
@@ -476,10 +514,23 @@ class OrderPage extends React.Component {
                                     </button>
                                 )}
                             />
+                            <div className="picture-container">
+                                <div className="picture">
+                                    <img src={this.state.order.photo}
+                                         className="picture-src" id="wizardPicturePreview"
+                                         title=""/>
+                                    <input id="wizard-picture"
+                                           type="file"
+                                           name="photo"
+                                           onChange={this.fileInputChange}
+                                    />
+                                </div>
+                                <h6 className="description">Выберите изображение</h6>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div className="col-md-6">
+                <div className="col-md-5">
                     <div className="input-group form-control-lg">
                         <div className="input-group-prepend">
 <span className="input-group-text">
@@ -490,7 +541,7 @@ class OrderPage extends React.Component {
                             <input
                                 className="form-control"
                                 id="exampleInput11"
-                                name="codeOfModel"
+                                name="код модели"
                                 placeholder="Number of Model"
                                 required=""
                                 aria-required="true"

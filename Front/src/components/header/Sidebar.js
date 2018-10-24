@@ -62,7 +62,7 @@ const Sidebar = () => {
                         <li className="nav-item active-pro">
                             <NavLink className="nav-link" href="#" to="/orders">
                                 <i className="material-icons">settings</i>
-                                <p>Order</p>
+                                <p>Заказы</p>
                             </NavLink>
                         </li>
                         <li className="nav-item ">
@@ -129,7 +129,20 @@ const Sidebar = () => {
                         {" "}
                           <p className="fa fa-tasks"/>{" "}
                       </span>
-                                            <span className="sidebar-normal"> Model </span>
+                                            <span className="sidebar-normal"> Модели </span>
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink
+                                            to="/technologies"
+                                            className="nav-link nav-item"
+                                            href="../examples/tables/extended.html"
+                                        >
+                      <span className="sidebar-mini">
+                        {" "}
+                          <p className="fa fa-tasks"/>{" "}
+                      </span>
+                                            <span className="sidebar-normal"> Технология </span>
                                         </NavLink>
                                     </li>
                                     <li>
@@ -142,17 +155,42 @@ const Sidebar = () => {
                         {" "}
                           <p className="fa fa-tasks"/>{" "}
                       </span>
-                                            <span className="sidebar-normal"> Customer </span>
+                                            <span className="sidebar-normal"> Заказчик </span>
                                         </NavLink>
                                     </li>
                                 </ul>
                             </div>
                         </li>
-                        <li className="nav-item active-pro">
-                            <a className="nav-link" href="#">
-                                <i className="material-icons">settings</i>
-                                <p>Статистика</p>
+                        <li className="nav-item ">
+                            <a
+                                className="nav-link"
+                                data-toggle="collapse"
+                                href="#tablesExamples_2"
+                            >
+                                <i className="material-icons">grid_on</i>
+                                <p>
+                                    {" "}
+                                    Статистика
+                                    <b className="caret"/>
+                                </p>
                             </a>
+                            <div className="collapse" id="tablesExamples_2">
+                                <ul className="nav">
+                                    <li>
+                                        <NavLink
+                                            activeClassName=" active"
+                                            className="nav-link nav-item"
+                                            to="/finishedOperations"
+                                        >
+                      <span className="sidebar-mini">
+                        {" "}
+                          <p className="fa fa-user"/>{" "}
+                      </span>
+                                            <span className="sidebar-normal"> Готовые операции </span>
+                                        </NavLink>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
                         <li className="nav-item active-pro">
                             <a className="nav-link" href="#">
@@ -179,9 +217,8 @@ const Sidebar = () => {
                     style={{backgroundImage: "url(./assets/img/sidebar-4.jpg)"}}
                 />
             </div>
-            <
-            /div>
-            );
-            };
+        </div>
+    );
+};
 
-            export default Sidebar;
+export default Sidebar;

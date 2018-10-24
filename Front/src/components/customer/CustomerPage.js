@@ -11,14 +11,15 @@ class CustomerPage extends React.Component {
     state = {
         customer: {
             customerName: "Kamuran-",
-            contactNumber: "nomerim yuq",
+            contactNumber: "156138435",
             email: "kamuran@nmadir.com",
             logo: "../../assets/img/customer.svg"
         },
         customers: [],
         modal: {
             visibility: "none"
-        }
+        },
+        title:"Заказчик"
     };
 
     defaultCustomerState = {
@@ -43,8 +44,14 @@ class CustomerPage extends React.Component {
             }
         });
     };
-    edit = () => {
-
+    edit = customer => {
+        this.setState({
+            modal: {
+                visibility: "block",
+                header: "Изменить заказчика"
+            },
+            customer: customer
+        });
     };
 
     closeModal = () => {
@@ -152,6 +159,7 @@ class CustomerPage extends React.Component {
                         <div className="container-fluid">
                             <div className="row">
                                 <List
+                                    title={this.state.title}
                                     add={this.add}
                                     edit={this.edit}
                                     items={this.state.customers}
@@ -162,7 +170,7 @@ class CustomerPage extends React.Component {
                                     this.state.modal.visibility === 'block' &&
                                     <Modal
                                         item={this.state.customer}
-                                        tabs={['Customer']}
+                                        tabs={['Заказчик']}
                                         visibility={this.state.modal.visibility}
                                         items={[this.customerTemplate]}
                                         closeModal={this.closeCustomer}
@@ -192,14 +200,17 @@ class CustomerPage extends React.Component {
                         }}
                     />
                 </td>
-                <td>
+                {/*needs to be fixed*/}
+                <td className="td-name">
+                    <a href="#" onClick={() => props.edit(props)}>
                     {props.customerName}
+                </a>
                 </td>
                 <td>
-                    <p>{props.contactNumber}</p>
+                    {props.contactNumber}
                 </td>
                 <td>
-                    <p>{props.email}</p>
+                    {props.email}
                 </td>
             </tr>
         )
@@ -209,10 +220,10 @@ class CustomerPage extends React.Component {
         <thead>
         <tr>
             <th>ID</th>
-            <th>Name</th>
-            <th>Contact</th>
-            <th>Email</th>
-            <th className="text-right">Actions</th>
+            <th>Имя</th>
+            <th>Контакт</th>
+            <th>Эл. адрес</th>
+            <th className="text-right">Действия</th>
         </tr>
         </thead>
     );
@@ -221,7 +232,7 @@ class CustomerPage extends React.Component {
         return (
             <div className="row justify-content-center">
                 <div className="col-sm-12">
-                    <h5 className="info-text"> Info About Customer </h5>
+                    <h5 className="info-text"> Информация о клиенте </h5>
                 </div>
                 <div className="card-body">
                     <div className="row justify-content-center">
@@ -237,7 +248,7 @@ class CustomerPage extends React.Component {
                                            onChange={this.fileInputChange}
                                     />
                                 </div>
-                                <h6 className="description">Choose Picture</h6>
+                                <h6 className="description">Выберите изображение</h6>
                             </div>
                         </div>
                         <div className="col-sm-6">
@@ -250,7 +261,7 @@ class CustomerPage extends React.Component {
                                 <div className="form-group bmd-form-group">
                                     <input className="form-control" id="exampleInput1"
                                            name="customerName"
-                                           placeholder="Customer Name"
+                                           placeholder="Имя заказчика"
                                            required=""
                                            aria-required="true"
                                            type="text"
@@ -268,7 +279,7 @@ class CustomerPage extends React.Component {
                                 <div className="form-group bmd-form-group">
                                     <input className="form-control" id="exampleInput11"
                                            name="contactNumber"
-                                           placeholder="Telegram Contact"
+                                           placeholder="Телеграм Контакт"
                                            required=""
                                            aria-required="true"
                                            type="text"
@@ -286,7 +297,7 @@ class CustomerPage extends React.Component {
                                 <div className="form-group bmd-form-group">
                                     <input className="form-control" id="exampleInput11"
                                            name="email"
-                                           placeholder="Email Address"
+                                           placeholder="Адрес электронной почты"
                                            required=""
                                            aria-required="true"
                                            type="text"

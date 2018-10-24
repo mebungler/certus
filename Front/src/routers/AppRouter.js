@@ -15,6 +15,8 @@ import "../assets/css/css.css";
 import OperationsPage from "../components/operation/OperationsPage";
 import ModelPage from "../components/model/ModelPage"
 import OrderPage from "../components/order/OrderPage"
+import FinishedOperationPage from "../components/finishedOperation/FinishedOperationPage"
+import TechnologyPage from "../components/technology/TechnologyPage";
 
 const AppRouter = ({location}) => (
     <div className="wrapper">
@@ -35,6 +37,8 @@ const AppRouter = ({location}) => (
                 path="/operations"
                 component={OperationsPage}
             />
+            <Route location={location} path={"/technologies"} component={TechnologyPage}/>
+            <Route location={location} path={"/finishedOperations"} component={FinishedOperationPage}/>
             <Route location={location} path="/customers" component={CustomerPage}/>
             <Route location={location} path="/orders" component={OrderPage}/>
             <Route location={location} component={NotFoundPage}/>

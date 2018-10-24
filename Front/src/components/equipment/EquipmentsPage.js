@@ -16,15 +16,16 @@ class EquipmentsPage extends React.Component {
             visibility: "none",
             header: ""
         },
-        equipment: {}
+        equipment: {},
+        title:"Оборудование"
     };
 
     defaultEquipmentState = {
         id: uuid(),
         name: "",
-        brand: "Select brand name",
-        machineType: "Select machine type",
-        machineStatus: "Select machine status"
+        brand: "Выберите название бренда",
+        machineType: "Выберите тип машины",
+        machineStatus: "Выберите состояние машины"
     };
 
     componentDidMount() {
@@ -42,7 +43,7 @@ class EquipmentsPage extends React.Component {
             ...this.state,
             modal: {
                 visibility: "block",
-                header: "Add equipment"
+                header: "Добавить оборудование"
             },
             equipment: this.defaultEquipmentState
         });
@@ -53,11 +54,12 @@ class EquipmentsPage extends React.Component {
             ...this.state,
             modal: {
                 visibility: "block",
-                header: "Edit equipment"
+                header: "Редактировать оборудование"
             },
             equipment: _equipment
         });
     };
+
     closeModal = () => {
         this.setState({
             ...this.state,
@@ -89,22 +91,22 @@ class EquipmentsPage extends React.Component {
     tableHeader = () => (
         <thead>
         <tr>
-            <th>Name</th>
-            <th>Brand name</th>
-            <th>Machine type</th>
-            <th>Machine status</th>
-            <th className="text-right">Actions</th>
+            <th>Название</th>
+            <th>Название бренда</th>
+            <th>Тип машины</th>
+            <th>Состояние машины</th>
+            <th className="text-right">Действия</th>
         </tr>
         </thead>
     );
     equipmentInfoControl = ({content: equipment}) => (
         <div className="row justify-content-center">
             <div className="col-sm-12">
-                <h5 className="info-text"> Enter name of the equipment </h5>
+                <h5 className="info-text">Введите название оборудования </h5>
             </div>
             <div className="col-md-6">
                 <div className="text-center">
-                    <h4 className="text-center">Auto generated QR code</h4>
+                    <h4 className="text-center">Автогенерированный QR-код</h4>
                     <div className="text-center">
                         <QRCode className="text-center" value={equipment.id}/>
                     </div>
@@ -142,7 +144,7 @@ class EquipmentsPage extends React.Component {
                             className="form-control"
                             id="exampleInput11"
                             name="name"
-                            placeholder="Name of the machine"
+                            placeholder="Название машины"
                             required=""
                             aria-required="true"
                             type="text"
@@ -313,13 +315,14 @@ class EquipmentsPage extends React.Component {
                                 <div className="row">
                                     <List add={this.add}
                                           edit={this.edit}
+                                          title={this.state.title}
                                           items={this.props.equipments}
                                           itemTemplate={EquipmentItem}
                                           header={this.tableHeader}/>
                                     {this.state.modal.visibility === "block" && (
                                         <Modal item={this.state.equipment}
                                                visibility={this.state.modal.visibility}
-                                               tabs={["Equipment info"]}
+                                               tabs={["Информация об оборудовании"]}
                                                items={[this.equipmentInfoControl]}
                                                closeModal={this.closeModal}
                                                addObject={this.requestAdd}

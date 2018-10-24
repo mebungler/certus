@@ -3,8 +3,6 @@ import Sidebar from "../header/Sidebar";
 import List from "../list/List";
 import api from "../../api/api"
 import Modal from "../modal/Modal";
-import QRCode from "qrcode.react";
-import ReactToPrint from "react-to-print";
 import uuid from "uuid";
 
 
@@ -30,32 +28,34 @@ class ModelPage extends React.Component {
             },
             actionOnModel: [{
                 operation: {
-                    name: "Select operation",
+                    name: "Выберите операцию",
                     number: "0000"
                 },
                 equipment: {
-                    machineType: "Select machine"
+                    machineType: "Выбрать машину"
                 }
             }]
-        }
+        },
+        actionVisibility: "none",
+        title:"Модели"
     };
 
     defaultModelState = {
         id: uuid(),
         codeOfModel: "",
         customer: {
-            customerName: "Select customer"
+            customerName: "Выбрать клиента"
         },
         typeOfCloth: {
-            Name: "Select type of cloth"
+            Name: "Выберите тип издели"
         },
         actionOnModel: [{
             operation: {
-                name: "Select operation",
+                name: "Выберите операцию",
                 number: "0000"
             },
             equipment: {
-                machineType: "Select machine"
+                machineType: "Выбрать машину"
             }
         }]
     };
@@ -125,7 +125,12 @@ class ModelPage extends React.Component {
         })
     };
 
-
+    editAll = () => {
+        this.setState(prevState => ({
+            ...prevState,
+            actionVisibility: "block"
+        }))
+    };
 
     closeModal = () => {
         this.setState((prevState) => {
@@ -178,14 +183,17 @@ class ModelPage extends React.Component {
                                         items={this.state.models}
                                         itemTemplate={ModelItemTemplate}
                                         header={this.tableHeader}
+                                        title={this.state.title}
+                                        actionVisibility={this.state.actionVisibility}
+                                        editAll={this.editAll}
                                     />
                                     {
                                         this.state.modal.visibility === 'block' &&
                                         <Modal
                                             item={this.state.model}
-                                            tabs={['Actions']}
+                                            tabs={['Действия']}
                                             visibility={this.state.modal.visibility}
-                                            items={[ this.actions]}
+                                            items={[this.actions]}
                                             closeModal={this.closeModal}
                                             addObject={this.addRequest}
                                         />
@@ -202,13 +210,13 @@ class ModelPage extends React.Component {
     tableHeader = () => (
         <thead>
         <tr>
-            <th>Code of Model</th>
-            <th>Type of cloth</th>
-            <th>Customer</th>
-            <th>Number of operations</th>
-            <th>Created at</th>
-            <th>Updated at</th>
-            <th className="text-right">Actions</th>
+            <th>Код модели</th>
+            <th>Тип изделия</th>
+            <th>Заказчик</th>
+            <th>Количество операций</th>
+            <th>Создан</th>
+            <th>Обновлено</th>
+            <th className="text-right">Действия</th>
         </tr>
         </thead>
     );
@@ -233,7 +241,7 @@ class ModelPage extends React.Component {
                 ...prevState,
                 model: {
                     ...prevState.model,
-                    equipment:name
+                    equipment: name
                 }
             }
         })
@@ -248,9 +256,9 @@ class ModelPage extends React.Component {
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Type of Machine</th>
-                                <th>Operation</th>
-                                <th>Actions</th>
+                                <th>Тип машины</th>
+                                <th>Операция</th>
+                                <th>Действия</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -282,7 +290,7 @@ class ModelPage extends React.Component {
                                                     return (
                                                         <a className="dropdown-item"
                                                            onClick={() => {
-                                                               this.toggleSelect(i,i.target.value)
+                                                               this.toggleSelect(i, i.target.value)
                                                            }}
                                                            href="#">{i.machineType}</a>
                                                     );
@@ -373,11 +381,11 @@ class ModelPage extends React.Component {
                     actionOnModel: [...prevState.model.actionOnModel,
                         {
                             operation: {
-                                name: "Select operation",
+                                name: "Выберите операцию",
                                 number: "0000"
                             },
                             equipment: {
-                                machineType: "Select machine"
+                                machineType: "Выбрать машину"
                             }
                         }]
                 }
@@ -411,6 +419,14 @@ const ModelItemTemplate = (props) => {
             </td>
             <td>
                 <p>{props.updatedAt}</p>
+            </td>
+            <td style={{display: props.actionVisibility}}>
+                <a className="btn btn-just-icon btn-round btn-danger">
+                    <i className="material-icons">delete</i>
+                </a>
+                <a className="btn btn-just-icon btn-round btn-success">
+                    <i className="material-icons">file_copy</i>
+                </a>
             </td>
         </tr>
     )

@@ -30,7 +30,8 @@ class UsersList extends React.Component {
         },
         pages: 1,
         errors: {},
-        users: this.props.users
+        users: this.props.users,
+        title:"Сотрудники"
     };
     defaultUserState = {
         email: "",
@@ -58,17 +59,16 @@ class UsersList extends React.Component {
         this.setState({
             modal: {
                 visibility: "block",
-                header: "Add user"
+                header: "Добавить пользователя"
             },
             user: this.generateNewUser()
         });
     };
     editUser = user => {
-        console.log(user);
         this.setState({
             modal: {
                 visibility: "block",
-                header: "Edit user"
+                header: "Изменить пользователя"
             },
             user: user
         });
@@ -99,6 +99,7 @@ class UsersList extends React.Component {
         return (
             <div className="col-md-12">
                 <List
+                    title={this.state.title}
                     add={this.addUser}
                     edit={this.editUser}
                     items={this.props.users}
@@ -160,10 +161,10 @@ export default connect(mapStateToProps)(UsersList);
 const tableHeader = () => (
     <thead>
     <tr>
-        <th>Photo</th>
-        <th>Name&Username</th>
-        <th className="th-description">Job position</th>
-        <th className="text-right">Actions</th>
+        <th>Фото</th>
+        <th>Имя сотрудника и логин</th>
+        <th className="th-description">Позиция работы</th>
+        <th className="text-right">Действия</th>
     </tr>
     </thead>
 );

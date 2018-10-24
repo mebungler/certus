@@ -16,7 +16,7 @@ export default {
         get: () => axios.get(url + "/api/user").then(res => res)
     },
     operation: {
-        product: credentials =>
+        get: credentials =>
             axios
                 .get(url + "/api/product/" + credentials)
                 .then(res => res)
@@ -46,7 +46,7 @@ export default {
         getAll: () =>
             axios.get(url + "/api/equipment").then(res => {
                 return res
-            }).catch(err => err.respond)
+            }).catch(err => err.response)
     },
     model: {
         add: (credentials) =>
@@ -58,38 +58,57 @@ export default {
             axios.get(url + "/api/model", credentials).then(res => {
                 return res
             }).catch(err => err.response),
-        preGetAll:(credentials)=>
-            axios.get(url+"/api/pre/model",credentials).then(res=>{
+        preGetAll: (credentials) =>
+            axios.get(url + "/api/pre/model", credentials).then(res => {
                 return res
-            }).catch(err=>err.response)
+            }).catch(err => err.response)
 
     },
-    customer:{
-        add:(credentials)=>
-            axios.post(url+"/api/customer",credentials)
-                .then(res=>res)
-                .catch(err=>err.response),
-        getAll:()=>
-            axios.get(url+"/api/customer").then(res=>{
+    customer: {
+        get: (credentials) =>
+            axios.get(url + "/api/product/" + credentials)
+                .then(res => res)
+                .catch(err => err.response),
+        add: (credentials) =>
+            axios.post(url + "/api/customer", credentials)
+                .then(res => res)
+                .catch(err => err.response),
+        getAll: () =>
+            axios.get(url + "/api/customer").then(res => {
                 return res
-            }).catch(err=>err.response),
-        preGetAll:(credentials)=>
-            axios.get(url+"/api/pre/customer",credentials).then(res=>{
+            }).catch(err => err.response),
+        preGetAll: (credentials) =>
+            axios.get(url + "/api/pre/customer", credentials).then(res => {
                 return res
-            }).catch(err=>err.response)
+            }).catch(err => err.response)
     },
-    order:{
-        add:(credentials)=>
-            axios.post(url+"/api/order",credentials)
-                .then(res=>res)
-                .catch(err=>err.response),
-        getAll:()=>
-            axios.get(url+"/api/order").then(res=>{
+    order: {
+        add: (credentials) =>
+            axios.post(url + "/api/order", credentials)
+                .then(res => res)
+                .catch(err => err.response),
+        getAll: () =>
+            axios.get(url + "/api/order").then(res => {
                 return res
-            }).catch(err=>err.response),
-        preGetAll:(credentials)=>
-            axios.get(url+"/api/pre/order",credentials).then(res=>{
+            }).catch(err => err.response),
+        preGetAll: (credentials) =>
+            axios.get(url + "/api/pre/order", credentials).then(res => {
                 return res
-            }).catch(err=>err.response)
+            }).catch(err => err.response)
+    },
+    finishedOperation: {
+        add: (credentials) =>
+            axios.post(url + "/api/finishedoperation", credentials)
+                .then(res => res)
+                .catch(err => err.response),
+        getAll: () =>
+            axios.get(url + "/api/finishedoperation").then(res => {
+                return res
+            }).catch(err => err.response),
+        preGetAll: (credentials) =>
+            axios.get(url + "/api/pre/finishedoperation", credentials).then(res => {
+                return res
+            }).catch(err => err.response)
     }
+
 }

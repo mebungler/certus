@@ -101,7 +101,8 @@ class Modal extends React.Component {
                                     <div
                                         className="moving-tab"
                                         style={{
-                                            width: (780 / tabsCount).toString() + "px",
+                                            //width:103%
+                                            width: (103 / tabsCount).toString() + "%",
                                             marginLeft: this.state.selectedTabMargin,
                                             transform: "translate3d(-8px, 0px, 0px)",
                                             transition: "transform 0s ease 0"
@@ -131,7 +132,7 @@ class Modal extends React.Component {
                                         <input
                                             className="btn btn-previous btn-fill btn-rose btn-wd"
                                             name="previous"
-                                            value="Previous"
+                                            value="Предыдущий"
                                             type="button"
                                             style={{
                                                 display: this.state.selectedTab > 0 ? "block" : "none"
@@ -143,7 +144,7 @@ class Modal extends React.Component {
                                         <input
                                             className="btn btn-next btn-fill btn-rose btn-wd"
                                             name="next"
-                                            value="Next"
+                                            value="Дальше"
                                             type="button"
                                             style={{
                                                 display:
@@ -156,7 +157,7 @@ class Modal extends React.Component {
                                         <input
                                             className="btn btn-finish btn-fill btn-rose btn-wd"
                                             name="finish"
-                                            value="Add"
+                                            value="Добавить"
                                             style={{
                                                 display:
                                                     this.state.selectedTab == this.props.tabs.length - 1

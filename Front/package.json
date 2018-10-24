@@ -33,6 +33,7 @@
     "react": "^16.4.1",
     "react-art-svg-renderer": "0.0.1-rc.8",
     "react-dom": "^16.4.1",
+    "react-minimal-pie-chart": "^3.3.0",
     "react-popper": "^1.0.0",
     "react-qr-code": "^0.1.2",
     "react-qr-reader": "^2.1.0",
