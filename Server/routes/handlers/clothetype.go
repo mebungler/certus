@@ -81,9 +81,7 @@ func RemoveClotheType(w http.ResponseWriter, r *http.Request)  {
 	err:=database.Remove(clotheType)
 	if err== nil {
 		w.WriteHeader(http.StatusOK)
-		if err:=json.NewEncoder(w).Encode(Response{TypeOfCloth: clotheType}); err!=nil{
-			logger.LogErr(err)
-		}
+
 	} else {
 		w.WriteHeader(http.StatusBadRequest)
 		if err:=json.NewEncoder(w).Encode(Response{Errors:Errors{Global:"Invalid credentials"}}); err!=nil{

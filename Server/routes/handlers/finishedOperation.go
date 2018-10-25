@@ -95,9 +95,6 @@ func RemoveFinshedOperation(w http.ResponseWriter, r *http.Request)  {
 	err:=database.Remove(finishedOperation)
 	if err== nil {
 		w.WriteHeader(http.StatusOK)
-		if err:=json.NewEncoder(w).Encode(Response{FinishedOperation: finishedOperation}); err!=nil{
-			logger.LogErr(err)
-		}
 	} else {
 		w.WriteHeader(http.StatusBadRequest)
 		if err:=json.NewEncoder(w).Encode(Response{Errors:Errors{Global:"Invalid credentials"}}); err!=nil{

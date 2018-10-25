@@ -81,9 +81,7 @@ func RemoveCustomer(w http.ResponseWriter, r *http.Request)  {
 	err:=database.Remove(customer)
 	if err== nil {
 		w.WriteHeader(http.StatusOK)
-		if err:=json.NewEncoder(w).Encode(Response{Customers: customer}); err!=nil{
-			logger.LogErr(err)
-		}
+
 	} else {
 		w.WriteHeader(http.StatusBadRequest)
 		if err:=json.NewEncoder(w).Encode(Response{Errors:Errors{Global:"Invalid credentials"}}); err!=nil{
