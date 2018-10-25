@@ -80,9 +80,6 @@ func RemoveTechnology(w http.ResponseWriter, r *http.Request)  {
 	err:=database.Remove(technology)
 	if err== nil {
 		w.WriteHeader(http.StatusOK)
-		if err:=json.NewEncoder(w).Encode(Response{Technology: technology}); err!=nil{
-			logger.LogErr(err)
-		}
 	} else {
 		w.WriteHeader(http.StatusBadRequest)
 		if err:=json.NewEncoder(w).Encode(Response{Errors:Errors{Global:"Invalid credentials"}}); err!=nil{

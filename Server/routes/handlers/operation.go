@@ -1,19 +1,19 @@
 package handlers
 
 import (
-	"../../decoder"
-	"../../data/models"
 	"../../data/database"
+	"../../data/models"
+	"../../decoder"
 	"../../logger"
-	"github.com/gorilla/mux"
-	"net/http"
 	"encoding/json"
+	"github.com/gorilla/mux"
 	"io/ioutil"
+	"net/http"
 )
 
 func AddOperation(w http.ResponseWriter, r *http.Request) {
 	operation, err := decoder.GetOperation(r.Body)
-	a,_:=ioutil.ReadAll(r.Body)
+	a, _ := ioutil.ReadAll(r.Body)
 	print(string(a))
 	if err != nil {
 		logger.LogErr(err)
@@ -44,12 +44,10 @@ func GetOperations(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-
-
-func GetAllPreOperation(w http.ResponseWriter, r *http.Request)  {
-	params:=mux.Vars(r)
+func GetAllPreOperation(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
 	operations := []models.Operation{}
-	err := database.GetAllWithEagerLoading(&operations,params["component"])
+	err := database.GetAllWithEagerLoading(&operations, params["component"])
 
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
@@ -81,7 +79,6 @@ func GetAllPreOperation(w http.ResponseWriter, r *http.Request)  {
 	}
 }*/
 
-
 func UpdateOperation(w http.ResponseWriter, r *http.Request) {
 	var operation models.Operation
 	decoder.Get(r.Body, &operation)
@@ -96,18 +93,15 @@ func UpdateOperation(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 }
 
-func RemoveOperation(w http.ResponseWriter, r *http.Request)  {
+func RemoveOperation(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
-	operation := models.Operation{ID:params["id"]}
-	err:=database.Remove(operation)
-	if err== nil {
+	operation := models.Operation{ID: params["id"]}
+	err := database.Remove(operation)
+	if err == nil {
 		w.WriteHeader(http.StatusOK)
-		if err:=json.NewEncoder(w).Encode(Response{Operations: operation}); err!=nil{
-			logger.LogErr(err)
-		}
 	} else {
 		w.WriteHeader(http.StatusBadRequest)
-		if err:=json.NewEncoder(w).Encode(Response{Errors:Errors{Global:"Invalid credentials"}}); err!=nil{
+		if err := json.NewEncoder(w).Encode(Response{Errors: Errors{Global: "Invalid credentials"}}); err != nil {
 			logger.LogErr(err)
 		}
 	}
