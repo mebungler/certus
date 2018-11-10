@@ -150,6 +150,12 @@ var routes = Routes{
 		HandlerFunc: handlers.GetAllOrders,
 	},
 	Route{
+		Name:        "GetReadyOrders",
+		Method:      "Get",
+		Pattern:     "/api/order",
+		HandlerFunc: handlers.GetCurrentOrders,
+	},
+	Route{
 		Name:        "AddPassport",
 		Method:      "POST",
 		Pattern:     "/api/passport",

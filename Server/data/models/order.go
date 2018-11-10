@@ -10,9 +10,12 @@ type Order struct {
 	Model Model 		 	`json:"model,omitempty"`
 	ModelID string
 	Property 	  []Property `json:"property,omitempty"`
-	TechnologyID  	string 		`json:"technology_id"`
-	TypeOfProcess 		string `json:"type_of_process"`
+	TechnologyID  	    string
+	TypeOfProcess 		string `json:"typeOfProcess"`
 	Photo				string `json:"photo,omitempty"`
-
+	ManagerReady 		bool `json:"managerReady"`
+	ReadyForCutting  	bool `json:"readyForCutting"`
+	Finished 			bool `json:"finished"`
+	
 
 }
