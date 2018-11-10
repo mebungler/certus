@@ -1,8 +1,8 @@
 package database
 
 import (
-	"reflect"
 	"../../logger"
+	"reflect"
 )
 
 func Get(object interface{}) error {
@@ -60,3 +60,11 @@ func Update(object interface{}) error {
 	}
 	return nil
 }
+func GetWithQuery(object interface{},query string) error {
+	DB.Where(query).Find(object)
+	if DB.Error != nil {
+		return DB.Error
+	}
+	return nil
+}
+

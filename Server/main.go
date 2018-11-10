@@ -36,6 +36,8 @@ func main() {
 	database.Add(models.Order{ID: "ddd222", ModelID: "ddddModel111", CustomerID: "1112dd", CodeOfModel: "11112233"})
 	database.Add(models.FinishedOperation{ID: "some1", ModelID: "ddddModel111", UserID: "1234", OrderID: "ddd222"})
 	database.Add(models.FinishedOperation{ID: "some12", ModelID: "123231ds34343dd23232s", UserID: "123234", OrderID: "ddd222",Time:232})
+
+
 	// database.GetAllOperations()
 	//	fmt.Println(ddd[0].Equipment.Name)
 

@@ -107,3 +107,20 @@ func RemoveOrder(w http.ResponseWriter, r *http.Request)  {
 		}
 	}
 }
+
+func GetCurrentOrders(w http.ResponseWriter , r *http.Request)  {
+
+	order:= []models.Order{}
+	temp:= database.GetCurrentOrders(&order)
+	if temp != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		if temp := json.NewEncoder(w).Encode(Response{Errors: Errors{Global: "Failed to get order:\n" + temp.Error()}}); temp != nil {
+			logger.LogErr(temp)
+		}
+		return
+	}
+	w.WriteHeader(http.StatusOK)
+	if temp := json.NewEncoder(w).Encode(Response{Order: []models.Order{order}}); temp != nil {
+		logger.LogErr(temp)
+	}
+}
