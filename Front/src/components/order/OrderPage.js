@@ -4,21 +4,26 @@ import uuid from "uuid";
 import List from "../list/List";
 import Modal from "../modal/Modal";
 import api from "../../api/api";
-import QRCode from "qrcode.react";
-import ReactToPrint from "react-to-print";
+import {SwatchesPicker} from 'react-color';
+import ReactTooltip from 'react-tooltip';
 
 class OrderPage extends React.Component {
 
     //var
     state = {
         title: "Заказы",
+        actionVisibility: "none",
         modal: {
-            visibility: "none"
+            visibility: "none",
+            editing: false
         },
         orders: [],
         order: {
+            managerReady: false,
             photo: "",
-            customer: {},
+            customer: {
+                customerName: ""
+            },
             model: {},
             typeOfCloth: {
                 name: ""
@@ -32,7 +37,7 @@ class OrderPage extends React.Component {
     ModelID = uuid();
 
     defaultOrderState = {
-        photo:"../../assets/img/cs-ohnoes.svg",
+        photo: "../../assets/img/cs-ohnoes.svg",
         id: uuid(),
         customer: {
             customerName: "Выберите Клиента"
@@ -42,12 +47,13 @@ class OrderPage extends React.Component {
         property: [{
             quantity: "",
             size: "",
-            color: ""
+            color: "",
+            secondaryColor: ""
         }],
         model: {
-            codeOfModel: "",
             id: this.ModelID
         },
+        managerReady: false,
         typeOfCloth: {
             name: "Выберите тип Изделий"
         },
@@ -79,8 +85,19 @@ class OrderPage extends React.Component {
                 [obj]: {
                     [value.target.name]: value.target.value
                 }
-            },
+            }
         })
+    };
+
+    textChange = (obj, value) => {
+        this.setState({
+                ...this.state,
+                [obj]: {
+                    ...this.state[obj],
+                    [value.target.name]: value.target.value
+                }
+            }
+        )
     };
 
     inputArrayChange = (value, variable, index) => {
@@ -154,6 +171,10 @@ class OrderPage extends React.Component {
         }
     };
 
+    handleChangeComplete = (color) => {
+        this.setState({background: color.hex});
+    };
+
     removeAction = (index) => {
         this.setState((prevState => {
                 return {
@@ -174,11 +195,12 @@ class OrderPage extends React.Component {
         let {order} = this.state;
         api.order.add({
             id: order.id,
-            CodeOfModel: order.codeOfModel,
+            CodeOfModel: order.CodeOfModel,
             CustomerID: order.CustomerID,
-            ModelID: order.ModelID
+            ModelID: order.ModelID,
+            property: order.property,
+            photo: order.photo
         }).then(res => {
-            api.model.add(order.model);
             if (res.data.errors && res.data.errors !== {}) {
                 this.setState({
                     ...this.state,
@@ -192,6 +214,30 @@ class OrderPage extends React.Component {
         });
     };
 
+    saveRequest = () => {
+        let {order} = this.state;
+        api.order.update({
+            managerReady: order.managerReady,
+            id: order.id,
+            CodeOfModel: order.CodeOfModel,
+            CustomerID: order.CustomerID,
+            ModelID: order.ModelID,
+            property: order.property,
+            photo: order.photo
+        }).then(res => {
+            console.log(res);
+            if (res.data.errors && res.data.errors !== {}) {
+                this.setState({
+                    ...this.state,
+                    errors: {
+                        global: res.data.errors.global
+                    }
+                });
+            }
+            this.closeModal();
+            this.populateOrders();
+        });
+    };
 
     addAction = () => {
         this.setState((prevState) => {
@@ -201,7 +247,8 @@ class OrderPage extends React.Component {
                     ...prevState.order,
                     property: [...prevState.order.property,
                         {
-                            ...prevState.order.property
+                            ...prevState.order.property,
+                            OrderID:prevState.order.id
                         }]
                 }
             };
@@ -214,7 +261,8 @@ class OrderPage extends React.Component {
                 ...prevState,
                 modal: {
                     ...prevState.modal,
-                    visibility: 'none'
+                    visibility: 'none',
+                    editing: false
                 },
                 Order: this.defaultOrderState
             }
@@ -246,6 +294,13 @@ class OrderPage extends React.Component {
         })
     };
 
+    editAll = () => {
+        this.setState(prevState => ({
+            ...prevState,
+            actionVisibility: "block",
+            editing: true
+        }))
+    };
 
     toggleObjSelect = (name, value, object) => {
         this.setState({
@@ -282,8 +337,24 @@ class OrderPage extends React.Component {
             }
         })
     };
-    edit = () => {
-
+    edit = order => {
+        console.log(this.state.customers);
+        console.log("customers");
+        console.log(order.CustomerID);
+        this.setState({
+            ...this.state,
+            modal: {
+                visibility: "block",
+                header: "Изменить заказчика",
+                editing: true
+            },
+            order: {
+                ...order,
+                customer: this.state.customers.find((item, index) => {
+                    return item.id === order.CustomerID
+                })
+            }
+        });
     };
 
     render() {
@@ -301,16 +372,20 @@ class OrderPage extends React.Component {
                                     items={this.state.orders}
                                     itemTemplate={this.OrderItemTemplate}
                                     header={this.tableHeader}
+                                    editAll={this.editAll}
+                                    actionVisibility={this.state.actionVisibility}
                                 />
                                 {
                                     this.state.modal.visibility === 'block' &&
                                     <Modal
+                                        editing={this.state.modal.editing}
                                         item={this.state.order}
                                         tabs={['Заказ', 'Таблица']}
                                         visibility={this.state.modal.visibility}
                                         items={[this.orderTemplate, this.tableTemplate]}
                                         closeModal={this.closeModal}
                                         addObject={this.addRequest}
+                                        saveObject={this.saveRequest}
                                     />
                                 }
                             </div>
@@ -321,22 +396,23 @@ class OrderPage extends React.Component {
         );
     }
 
-    //components
+//components
 
     OrderItemTemplate = (props) => {
+        console.log("Order props");
+        console.log(props);
         let customer = this.state.customers.find((item, index) => {
             return item.id === props.CustomerID
         });
 
         let customerName = customer ? customer.customerName : "null";
 
-        let model = this.state.models.find((item, index) => {
-            return item.id === props.ModelID
-        });
+        // let order = this.state.orders.find((item, index) => {
+        //     return item.id === props.ModelID
+        // });
+        //
+        // let codeOfModel = order ? order.CodeOfModel : "null";
 
-        let codeOfModel = model ? model.codeOfModel : "null";
-        console.log("photo qani");
-        console.log(props);
         return (
             <tr>
 
@@ -355,10 +431,46 @@ class OrderPage extends React.Component {
                     {customerName}
                 </td>
                 <td>
-                    {codeOfModel}
+                    <a href="#" onClick={() => props.edit(props)}>
+                        {props.CodeOfModel}
+                    </a>
                 </td>
                 <td>
                     {}
+                </td>
+                {/*status*/}
+                <td>
+                    <ReactTooltip/>
+                    {props.managerReady ?
+                        <div className="ml-auto" data-tip="Manager ready">
+                            <a href="#" className="btn btn-lg btn-success btn-round btn-just-icon">
+                                <i className="fas fa-check"></i>
+                            </a>
+                        </div>
+                        :
+                        <div className="ml-auto" data-tip="Manager not ready">
+                            <a href="#" className="btn btn-lg btn-danger btn-round btn-just-icon">
+                                <i className="fas fa-times"></i>
+                            </a>
+                        </div>}
+                    <div className="ml-auto" data-tip="Ready for cutting">
+                        <a href="#" className="btn btn-lg btn-success btn-round btn-just-icon">
+                            <i className="fas fa-cut"></i>
+                        </a>
+                    </div>
+                    <div className="ml-auto" data-tip="Not finished">
+                        <a href="#" className="btn btn-lg btn-danger btn-round btn-just-icon">
+                            <i className="fas fa-clock"></i>
+                        </a>
+                    </div>
+                </td>
+                <td style={{display: props.actionVisibility}}>
+                    <a href="#" className="btn btn-just-icon btn-round btn-danger btn-block">
+                        <i className="fas fa-trash"></i>
+                    </a>
+                    <a href="#" className="btn btn-just-icon btn-round btn-success btn-block">
+                        <i className="fas fa-clone"></i>
+                    </a>
                 </td>
             </tr>
         )
@@ -370,8 +482,9 @@ class OrderPage extends React.Component {
             <tr>
                 <th>Фото</th>
                 <th>Заказчик</th>
-                <th>Модель</th>
+                <th>Номер Моделей</th>
                 <th>Тип издели</th>
+                <th>Статус</th>
                 <th className="text-right">Действия</th>
             </tr>
             </thead>
@@ -389,6 +502,7 @@ class OrderPage extends React.Component {
                                 <th>Количество</th>
                                 <th>Размер</th>
                                 <th>Цвет</th>
+                                <th>Второй Цвет</th>
                                 <th>Действие</th>
                             </tr>
                             </thead>
@@ -443,19 +557,21 @@ class OrderPage extends React.Component {
                                         <div className="input-group form-control-lg">
 
                                             <div className="form-group bmd-form-group">
-                                                <input
-                                                    className="form-control"
-                                                    id="exampleInput11"
-                                                    name="size"
-                                                    placeholder="Цвет"
-                                                    required=""
-                                                    aria-required="true"
-                                                    type="text"
-                                                    // equipment.name
-                                                    value={props.content.property.color}
-                                                    onChange={(value) => {
-                                                        this.inputArrayChange(value, "color", index)
-                                                    }}
+                                                <SwatchesPicker
+                                                    width={"120px"}
+                                                    height={"60px"}
+                                                    onChangeComplete={this.handleChangeComplete}
+                                                />
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div className="input-group form-control-lg">
+                                            <div className="form-group bmd-form-group">
+                                                <SwatchesPicker
+                                                    width={"120px"}
+                                                    height={"60px"}
+                                                    onChangeComplete={this.handleChangeComplete}
                                                 />
                                             </div>
                                         </div>
@@ -463,7 +579,7 @@ class OrderPage extends React.Component {
                                     <td>
                                         <a
                                             onClick={() => this.removeAction(index)}
-                                            className="btn btn-danger btn-round">
+                                            className="btn btn-danger btn-link">
                                             <i className="material-icons"> close</i>
                                             <div className="ripple-container"/>
                                         </a>
@@ -473,6 +589,28 @@ class OrderPage extends React.Component {
                         </table>
                     </div>
                     <div className="card-footer">
+                        <div className="d-flex">
+                            <div className="form">
+                                <input type="checkbox"
+                                       id="checkbox"
+                                       className="form-check-input"
+                                       checked={props.content.managerReady}
+                                       onChange={() => {
+                                           this.setState({
+                                               ...this.state,
+                                               order: {
+                                                   ...this.state.order,
+                                                   managerReady: !this.state.order.managerReady
+                                               }
+                                           });
+                                           console.log(this.state.order.managerReady)
+                                       }}
+                                />
+                                <label for="checkbox" className="form-check-label">
+                                    <h4>Manager Ready</h4>
+                                </label>
+                            </div>
+                        </div>
                         <div className="ml-auto">
                             <a onClick={this.addAction} className="btn btn-just-icon btn-round btn-success">
                                 <i className="material-icons">add</i>
@@ -483,40 +621,20 @@ class OrderPage extends React.Component {
             </div>
         )
     };
-    orderTemplate = (props) => {
+    orderTemplate = ({content: props}) => {
+        console.log(props);
+        console.log("order data");
         return (
             <div className="row justify-content-center">
                 <div className="col-sm-12">
                     <h5 className="info-text"> Введите информацию о модели </h5>
                 </div>
-                <div className="col-md-7">
+                <div className="col-md-5">
                     <div className="text-center">
-                        <h4 className="text-center">Автогенерированный QR-код</h4>
                         <div className="text-center">
-                            <QRCode className="text-center" value={props.content.id}/>
-                        </div>
-                        <div className="text-center">
-                            <button
-                                // onClick={this.saveQrCode}
-                                className="btn btn-rose btn-round btn-fab"
-                            >
-                                <i className="material-icons">save</i>
-                                <div className="ripple-container"/>
-                            </button>
-                            <ReactToPrint
-                                content={() => (
-                                    <QRCode className="text-center" value={props.content.id}/>
-                                )}
-                                trigger={() => (
-                                    <button className="btn btn-rose btn-round btn-fab">
-                                        <i className="material-icons">print</i>
-                                        <div className="ripple-container"/>
-                                    </button>
-                                )}
-                            />
                             <div className="picture-container">
                                 <div className="picture">
-                                    <img src={this.state.order.photo}
+                                    <img src={props.photo}
                                          className="picture-src" id="wizardPicturePreview"
                                          title=""/>
                                     <input id="wizard-picture"
@@ -530,35 +648,58 @@ class OrderPage extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div className="col-md-5">
+                <div className="col-md-7">
                     <div className="input-group form-control-lg">
                         <div className="input-group-prepend">
-<span className="input-group-text">
-<i className="fa fa-user"/>
-</span>
+                                    <span className="input-group-text">
+                                    <i className="fa fa-user"/>
+                                    </span>
                         </div>
                         <div className="form-group bmd-form-group">
                             <input
                                 className="form-control"
                                 id="exampleInput11"
-                                name="код модели"
-                                placeholder="Number of Model"
+                                name="CodeOfModel"
+                                placeholder="Код модели"
                                 required=""
                                 aria-required="true"
                                 type="text"
                                 // equipment.name
-                                value={props.content.model.codeOfModel}
+                                value={props.CodeOfModel}
                                 onChange={(value) => {
-                                    this.textInputChange("model", value)
+                                    this.textChange("order", value)
                                 }}
                             />
                         </div>
                     </div>
                     <div className="input-group form-control-lg">
                         <div className="input-group-prepend">
-<span className="input-group-text">
-<i className="fa fa-key"/>
-</span>
+                                    <span className="input-group-text">
+                                    <i className="fa fa-user"/>
+                                    </span>
+                        </div>
+                        <div className="form-group bmd-form-group">
+                            <input
+                                className="form-control"
+                                id="exampleInput11"
+                                name="Name"
+                                placeholder="тип изделия"
+                                required=""
+                                aria-required="true"
+                                type="text"
+                                // equipment.name
+                                value={props.typeOfCloth.Name}
+                                onChange={(value) => {
+                                    this.textInputChange("typeOfCloth", value)
+                                }}
+                            />
+                        </div>
+                    </div>
+                    <div className="input-group form-control-lg">
+                        <div className="input-group-prepend">
+                                    <span className="input-group-text">
+                                    <i className="fa fa-key"/>
+                                    </span>
                         </div>
                         <div className="form-group bmd-form-group">
                             <div className="dropdown">
@@ -568,7 +709,7 @@ class OrderPage extends React.Component {
                                     data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false">
                                     {/*brand*/}
-                                    {props.content.customer.customerName}
+                                    {props.customer && props.customer.customerName}
                                     <div className="ripple-container"/>
                                 </button>
                                 <div className="dropdown-menu"
@@ -590,51 +731,6 @@ class OrderPage extends React.Component {
                                         );
 
                                     })}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="input-group form-control-lg">
-                        <div className="input-group-prepend">
-<span className="input-group-text">
-<i className="fa fa-key"/>
-</span>
-                        </div>
-                        <div className="form-group bmd-form-group">
-                            <div className="dropdown">
-                                <button
-                                    className="dropdown-toggle btn btn-primary btn-round btn-block"
-                                    type="button" id="dropdownMenuButton"
-                                    data-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false">
-                                    {/*machineStatus*/}
-                                    {props.content.typeOfCloth.name}
-                                    <div className="ripple-container"/>
-                                </button>
-                                <div className="dropdown-menu"
-                                     aria-labelledby="dropdownMenuButton"
-                                     x-placement="bottom-start"
-                                     style={{
-                                         position: 'absolute',
-                                         top: '41px',
-                                         left: '1px',
-                                         willChange: 'top, left'
-                                     }}>
-                                    <a className="dropdown-item"
-                                       onClick={() => {
-                                           this.toggleObjSelect("name", "T-shirt", "typeOfCloth")
-                                       }}
-                                       href="#">T-shirt</a>
-                                    <a className="dropdown-item"
-                                       onClick={() => {
-                                           this.toggleObjSelect("name", "Y-shirt", "typeOfCloth")
-                                       }}
-                                       href="#">Y-shirt</a>
-                                    <a className="dropdown-item"
-                                       onClick={() => {
-                                           this.toggleObjSelect("name", "X-shirt", "typeOfCloth")
-                                       }}
-                                       href="#">X-shirt</a>
                                 </div>
                             </div>
                         </div>

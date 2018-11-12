@@ -236,6 +236,7 @@ class OperationsPages extends React.Component {
 
     operationTemplate = ({content: props}) => {
         console.log(props);
+        console.log("operation prop");
         return (
             <div className="row justify-content-center">
                 <div className="col-sm-12">

@@ -2,15 +2,17 @@ import React from "react";
 
 export const InlineError = ({text}) => <span style={{color: "#ae5856"}}> {text} </span>;
 
-export class NotificationMessage extends React.Component{
+export class NotificationMessage extends React.Component {
     state = {
-        className:"col-xs-11 col-sm-4 alert alert-rose alert-with-icon animated fadeInDown"
+        className: this.props.success ? "col-xs-11 col-sm-4 alert alert-success alert-with-icon animated fadeInDown" : "col-xs-11 col-sm-4 alert alert-success alert-with-icon animated fadeInDown"
     };
     render() {
         setTimeout(() => {
-            this.setState({className : "col-xs-11 col-sm-4 alert alert-rose alert-with-icon animated fadeInDown fadeOutUp"});
+            this.setState({
+                className: this.props.success ? "col-xs-11 col-sm-4 alert alert-success alert-with-icon animated fadeInDown fadeOutUp" : "col-xs-11 col-sm-4 alert alert-success alert-with-icon animated fadeInDown fadeOutUp"
+            });
         }, 3000);
-        const {header,message}=this.props;
+        const {header, message} = this.props;
         return (
             <div data-notify="container" className={this.state.className}
                  role="alert" data-notify-position="top-center"

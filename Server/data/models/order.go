@@ -9,13 +9,13 @@ type Order struct {
 	CodeOfModel string
 	Model Model 		 	`json:"model,omitempty"`
 	ModelID string
-	Property 	  []Property `json:"property,omitempty"`
+	Property 	  []Property `json:"property"`
 	TechnologyID  	    string
-	TypeOfProcess 		string `json:"typeOfProcess"`
+	TypeOfProcess 		string `json:"typeOfProcess,omitempty"`
 	Photo				string `json:"photo,omitempty"`
-	ManagerReady 		bool `json:"managerReady"`
-	ReadyForCutting  	bool `json:"readyForCutting"`
-	Finished 			bool `json:"finished"`
+	ManagerReady 		bool `json:"managerReady,omitempty"`
+	ReadyForCutting  	bool `json:"readyForCutting,omitempty"`
+	Finished 			bool `json:"finished,omitempty"`
 	
 
 }

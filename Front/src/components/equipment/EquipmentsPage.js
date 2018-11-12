@@ -17,7 +17,8 @@ class EquipmentsPage extends React.Component {
             header: ""
         },
         equipment: {},
-        title:"Оборудование"
+        title:"Оборудование",
+        actionVisibility:"none"
     };
 
     defaultEquipmentState = {
@@ -69,6 +70,13 @@ class EquipmentsPage extends React.Component {
         });
     };
 
+
+    editAll = () => {
+        this.setState(prevState => ({
+            ...prevState,
+            actionVisibility: "block"
+        }))
+    };
     textInputChange = (e) => {
         this.setState({
             ...this.state,
@@ -315,6 +323,8 @@ class EquipmentsPage extends React.Component {
                                 <div className="row">
                                     <List add={this.add}
                                           edit={this.edit}
+                                          editAll={this.editAll}
+                                          actionVisibility={this.state.actionVisibility}
                                           title={this.state.title}
                                           items={this.props.equipments}
                                           itemTemplate={EquipmentItem}

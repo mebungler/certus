@@ -37,7 +37,7 @@ class ModelPage extends React.Component {
             }]
         },
         actionVisibility: "none",
-        title:"Модели"
+        title: "Модели"
     };
 
     defaultModelState = {
@@ -168,6 +168,8 @@ class ModelPage extends React.Component {
         });
     };
 
+
+
     render() {
         return (
             <div>
@@ -196,6 +198,7 @@ class ModelPage extends React.Component {
                                             items={[this.actions]}
                                             closeModal={this.closeModal}
                                             addObject={this.addRequest}
+
                                         />
                                     }
                                 </div>
@@ -421,10 +424,10 @@ const ModelItemTemplate = (props) => {
                 <p>{props.updatedAt}</p>
             </td>
             <td style={{display: props.actionVisibility}}>
-                <a className="btn btn-just-icon btn-round btn-danger">
+                <a className="btn btn-just-icon btn-link btn-danger btn-block">
                     <i className="material-icons">delete</i>
                 </a>
-                <a className="btn btn-just-icon btn-round btn-success">
+                <a className="btn btn-just-icon btn-link btn-success btn-block">
                     <i className="material-icons">file_copy</i>
                 </a>
             </td>

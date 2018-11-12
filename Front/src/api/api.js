@@ -94,7 +94,11 @@ export default {
         preGetAll: (credentials) =>
             axios.get(url + "/api/pre/order", credentials).then(res => {
                 return res
-            }).catch(err => err.response)
+            }).catch(err => err.response),
+        update:(credentials)=>
+            axios.put(url+"/api/order",credentials)
+                .then(res => res)
+                .catch(err => err.response)
     },
     finishedOperation: {
         add: (credentials) =>

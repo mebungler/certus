@@ -42,6 +42,8 @@ class Modal extends React.Component {
     render() {
         const {visibility, header, description} = this.props;
         const tabsCount = this.props.items.length;
+        console.log(this.props);
+        console.log("modal props");
         return (
             <div
                 className="modal fade show"
@@ -154,19 +156,34 @@ class Modal extends React.Component {
                                             }}
                                             onClick={this.toggleNextTab}
                                         />
-                                        <input
-                                            className="btn btn-finish btn-fill btn-rose btn-wd"
-                                            name="finish"
-                                            value="Добавить"
-                                            style={{
-                                                display:
-                                                    this.state.selectedTab == this.props.tabs.length - 1
-                                                        ? "block"
-                                                        : "none"
-                                            }}
-                                            onClick={() => this.props.addObject()}
-                                            type="button"
-                                        />
+                                        {this.props.editing===true ? <input
+                                                className="btn btn-finish btn-fill btn-rose btn-wd"
+                                                name="save"
+                                                value="сохранить"
+                                                style={{
+                                                    display:
+                                                        this.state.selectedTab == this.props.tabs.length - 1
+                                                            ? "block"
+                                                            : "none"
+                                                }}
+                                                onClick={() => this.props.saveObject()}
+                                                type="button"
+                                            />
+                                            :
+                                            <input
+                                                className="btn btn-finish btn-fill btn-rose btn-wd"
+                                                name="finish"
+                                                value="Добавить"
+                                                style={{
+                                                    display:
+                                                        this.state.selectedTab == this.props.tabs.length - 1
+                                                            ? "block"
+                                                            : "none"
+                                                }}
+                                                onClick={() => this.props.addObject()}
+                                                type="button"
+                                            />
+                                        }
                                     </div>
                                     <div className="clearfix"/>
                                 </div>

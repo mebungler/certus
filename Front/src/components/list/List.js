@@ -3,7 +3,7 @@ import React from "react";
 export default class List extends React.Component {
     state = {
         search: "",
-        vis: "none"
+        visibility: "none"
     };
 
     render() {
@@ -42,64 +42,33 @@ export default class List extends React.Component {
                                     <div className="ripple-container"/>
                                 </button>
                                 <div className="dropdown pull-right">
-                                    {this.props.nonAddable ?
-                                        <div>
-                                            <button
-                                                type="submit"
-                                                id="moreLink"
-                                                data-toggle="dropdown"
-                                                aria-haspopup="true"
-                                                onClick={
-                                                    this.props.editAll
-                                                }
-                                                className="btn btn-rose btn-round btn-just-icon"
-                                            >
-                                                <i className="material-icons">edit</i>
-                                            </button>
-                                            <button
-                                                style={{display: this.state.vis}}
-                                                type="submit"
-                                                id="moreLink"
-                                                data-toggle="dropdown"
-                                                aria-haspopup="true"
-                                                onClick={
-                                                    this.editAll
-                                                }
-                                                className="btn btn-rose btn-round btn-just-icon"
-                                            >
-                                                <i className="material-icons">edit</i>
-                                            </button>
-                                        </div> : <div>
-                                            <button
-                                                type="submit"
-                                                id="moreLink"
-                                                data-toggle="dropdown"
-                                                aria-haspopup="true"
-                                                className="btn btn-rose btn-round btn-just-icon"
-                                            >
-                                                ...
-                                            </button>
-                                            <div
-                                                className="dropdown-menu dropdown-menu-right"
-                                                aria-labelledby="moreLink"
-                                            >
-                                                <a
-                                                    className="dropdown-item"
-                                                    onClick={this.props.edit}
-                                                    href="#"
-                                                >
-                                                    Edit
-                                                </a>
-                                                <a
-                                                    className="dropdown-item"
-                                                    onClick={this.props.add}
-                                                    href="#"
-                                                >
-                                                    Добавить
-                                                </a>
-                                            </div>
-                                        </div>}
-
+                                    <div>
+                                        <button
+                                            type="submit"
+                                            id="moreLink"
+                                            data-toggle="dropdown"
+                                            aria-haspopup="true"
+                                            onClick={
+                                                this.props.editAll
+                                            }
+                                            className="btn btn-rose btn-round btn-just-icon"
+                                        >
+                                            <i className="material-icons">edit</i>
+                                        </button>
+                                        <button
+                                            style={{display: this.state.visibility}}
+                                            type="submit"
+                                            id="moreLink"
+                                            data-toggle="dropdown"
+                                            aria-haspopup="true"
+                                            onClick={
+                                                this.editAll
+                                            }
+                                            className="btn btn-rose btn-round btn-just-icon"
+                                        >
+                                            <i className="material-icons">edit</i>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -154,20 +123,21 @@ export default class List extends React.Component {
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#" onClick={this.props.add} className="btn btn-rose btn-round btn-just-icon" style={{
-                                                position: "fixed",
-                                                right: 30,
-                                                bottom: 20,
-                                                height: 55,
-                                                width: 55
-                                            }}>
-                                                <i className="material-icons " style={{
-                                                    display:"block",
-                                                    margin:"6px auto",
-                                                    fontSize:"50px"
-                                                }}>add</i>
-                                            </a>
+
                                         </li>
+                                        <a href="#" onClick={this.props.add}
+                                           className="btn btn-rose btn-round btn-just-icon" style={{
+                                            right: 0,
+                                            bottom: 0,
+                                            height: 55,
+                                            width: 55
+                                        }}>
+                                            <i className="material-icons " style={{
+                                                display: "block",
+                                                margin: "6px auto",
+                                                fontSize: "50px"
+                                            }}>add</i>
+                                        </a>
                                     </ul>
                                 </td>
                             </tr>

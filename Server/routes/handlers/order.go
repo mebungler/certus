@@ -120,7 +120,7 @@ func GetCurrentOrders(w http.ResponseWriter , r *http.Request)  {
 		return
 	}
 	w.WriteHeader(http.StatusOK)
-	if temp := json.NewEncoder(w).Encode(Response{Order: []models.Order{order}}); temp != nil {
+	if temp := json.NewEncoder(w).Encode(Response{Order: order}); temp != nil {
 		logger.LogErr(temp)
 	}
 }

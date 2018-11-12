@@ -19,7 +19,8 @@ class CustomerPage extends React.Component {
         modal: {
             visibility: "none"
         },
-        title:"Заказчик"
+        title:"Заказчик",
+        actionVisibility:"none"
     };
 
     defaultCustomerState = {
@@ -54,6 +55,12 @@ class CustomerPage extends React.Component {
         });
     };
 
+    editAll = () => {
+        this.setState(prevState => ({
+            ...prevState,
+            actionVisibility: "block"
+        }))
+    };
     closeModal = () => {
         this.setState((prevState) => {
             return {
@@ -162,6 +169,8 @@ class CustomerPage extends React.Component {
                                     title={this.state.title}
                                     add={this.add}
                                     edit={this.edit}
+                                    editAll={this.editAll}
+                                    actionVisibility={this.state.actionVisibility}
                                     items={this.state.customers}
                                     itemTemplate={this.CustomerItemTemplate}
                                     header={this.tableHeader}
@@ -211,6 +220,14 @@ class CustomerPage extends React.Component {
                 </td>
                 <td>
                     {props.email}
+                </td>
+                <td style={{display: props.actionVisibility}}>
+                    <a className="btn btn-just-icon btn-link btn-danger btn-block">
+                        <i className="material-icons">delete</i>
+                    </a>
+                    <a className="btn btn-just-icon btn-link btn-success btn-block">
+                        <i className="material-icons">file_copy</i>
+                    </a>
                 </td>
             </tr>
         )
