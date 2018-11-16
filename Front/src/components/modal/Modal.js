@@ -42,8 +42,6 @@ class Modal extends React.Component {
     render() {
         const {visibility, header, description} = this.props;
         const tabsCount = this.props.items.length;
-        console.log(this.props);
-        console.log("modal props");
         return (
             <div
                 className="modal fade show"

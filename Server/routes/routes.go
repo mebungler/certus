@@ -437,6 +437,12 @@ var routes = Routes{
 		Pattern:     "/api/type/{id}",
 		HandlerFunc: handlers.RemoveClotheType,
 	},
+	Route{
+    Name:        "GetPorperties",
+    Method:      "Get",
+    Pattern:     "/api/property",
+    HandlerFunc: handlers.GetAllProperties,
+  },
 }
 
 

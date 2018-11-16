@@ -11,7 +11,7 @@ import (
 )
 
 func AddProperty(w http.ResponseWriter , r *http.Request)  {
-	var property models.Passport
+	var property models.Property
 	decoder.Get(r.Body, &property)
 	err := database.Add(property)
 	if err != nil {
@@ -37,6 +37,20 @@ func UpdateProperty(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.WriteHeader(http.StatusOK)
+}
+
+func GetAllProperties(w http.ResponseWriter, r *http.Request) {
+  properties := []models.Property{}
+  err := database.GetAll(&properties)
+  if err != nil {
+    w.WriteHeader(http.StatusInternalServerError)
+    if err := json.NewEncoder(w).Encode(Response{Errors: Errors{Global: "Failed to get passports:\n" + err.Error()}}); err != nil {
+      logger.LogErr(err)
+    }
+    return
+  }
+  w.WriteHeader(http.StatusOK)
+
 }
 
 func RemoveProperty(w http.ResponseWriter, r *http.Request)  {

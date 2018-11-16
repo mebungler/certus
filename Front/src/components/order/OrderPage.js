@@ -191,15 +191,13 @@ class OrderPage extends React.Component {
 
     };
 
-    addRequest = () => {
-        let {order} = this.state;
-        api.order.add({
-            id: order.id,
-            CodeOfModel: order.CodeOfModel,
-            CustomerID: order.CustomerID,
-            ModelID: order.ModelID,
-            property: order.property,
-            photo: order.photo
+    propertyRequest = (property) => {
+        api.property.add({
+            quantity: parseInt(property.quantity),
+            size: parseInt(property.size),
+            color: property.color,
+            secondaryColor: property.secondaryColor,
+            OrderID:property.OrderID
         }).then(res => {
             if (res.data.errors && res.data.errors !== {}) {
                 this.setState({
@@ -209,6 +207,28 @@ class OrderPage extends React.Component {
                     }
                 });
             }
+        });
+        console.log();
+        console.log("property add request");
+    };
+
+    addRequest = () => {
+        let {order} = this.state;
+        api.order.add({
+            id: order.id,
+            CodeOfModel: order.CodeOfModel,
+            CustomerID: order.CustomerID,
+            ModelID: order.ModelID,
+            property: order.property,
+            photo: order.photo,
+        }).then(res => {
+                console.log(order.property);
+                console.log("order properties");
+                order.property.map((value, index) => {
+                    this.propertyRequest(value);
+                    console.log();
+                    console.log("property in add request");
+                });
             this.closeModal();
             this.populateOrders();
         });
@@ -248,7 +268,7 @@ class OrderPage extends React.Component {
                     property: [...prevState.order.property,
                         {
                             ...prevState.order.property,
-                            OrderID:prevState.order.id
+                            OrderID: prevState.order.id
                         }]
                 }
             };
@@ -399,8 +419,6 @@ class OrderPage extends React.Component {
 //components
 
     OrderItemTemplate = (props) => {
-        console.log("Order props");
-        console.log(props);
         let customer = this.state.customers.find((item, index) => {
             return item.id === props.CustomerID
         });
@@ -622,8 +640,6 @@ class OrderPage extends React.Component {
         )
     };
     orderTemplate = ({content: props}) => {
-        console.log(props);
-        console.log("order data");
         return (
             <div className="row justify-content-center">
                 <div className="col-sm-12">

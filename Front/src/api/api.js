@@ -113,6 +113,16 @@ export default {
             axios.get(url + "/api/pre/finishedoperation", credentials).then(res => {
                 return res
             }).catch(err => err.response)
+    },
+    property:{
+        add:(credentials)=>
+            axios.post(url+"/api/property",credentials)
+                .then(res=>res)
+                .catch(err=>err.response),
+        getAll: () =>
+            axios.get(url + "/api/property").then(res => {
+                return res
+            }).catch(err => err.response)
     }
 
 }
